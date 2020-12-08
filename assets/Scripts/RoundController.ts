@@ -7,9 +7,12 @@
 
 const {ccclass, property} = cc._decorator;
 import Domino from "./Domino";
+import DominoDesk from "./DominoDesk";
 
 @ccclass
 export default class RoundController extends cc.Component {
+    @property(DominoDesk)
+    Desk: DominoDesk = null;
 
     @property
     Deck: string[] = [];
@@ -27,14 +30,14 @@ export default class RoundController extends cc.Component {
         // this.node.on('touchmove', this.onTouchMove, this);
     
         // this.node.on('touchend', this.onTouchEnd, this);
-
+        
     }
 
     onTouchStart(touch, event){
         this.PlayerDomino.node.active = true;
 
         this.PlayerDomino.node.position  = this.node.convertToNodeSpaceAR(touch.getLocation());
-
+        this.PlayerDomino.liftUp();
     }
 
     onTouchMove(touch, event){
@@ -42,7 +45,23 @@ export default class RoundController extends cc.Component {
     }
 
     onTouchEnd(touch, event){
-        this.PlayerDomino.node.active = false;
+        //this.PlayerDomino.node.active = false;
+        var domi = this.Desk.checkCanPlace(this.PlayerDomino);
+
+        if (domi == this.PlayerDomino){
+
+            this.PlayerDomino.placeDown(this.Desk.node.position, ()=>{
+                this.Desk.place(this.PlayerDomino.ID,this.node.convertToWorldSpaceAR(this.Desk.node.position));
+            });
+
+            
+        } else if (domi == null){
+            this.PlayerDomino.returnToOriginal();
+        } else {
+
+        }
+
+        
     }
 
     initDeck() {

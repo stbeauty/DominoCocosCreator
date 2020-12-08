@@ -10,14 +10,21 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class Domino extends cc.Component {
 
-    ID:string;
-    // LIFE-CYCLE CALLBACKS:
+    @property (cc.Sprite)
+    Shadow:cc.Sprite = null;
 
+    ID:string;
+    startedPosition: cc.Vec3;
+
+    rootDomi:Domino = null;
+    avaiID:string = "";
     // onLoad () {}
 
     start () {
 
     }
+
+
 
     setDomino(id:string){
         this.ID = id;
@@ -27,6 +34,29 @@ export default class Domino extends cc.Component {
            else
            sprite.node.active = false;
         });
+    }
+
+    liftUp(){
+        this.node.active = true;
+        this.Shadow.node.active = true;
+        this.Shadow.node.runAction(cc.sequence(cc.moveBy(0.1, cc.v2(-10,-10)), cc.callFunc(()=>{})));
+        this.node.runAction(cc.scaleBy(0.1, 1.1));
+    }
+
+    placeDown(dest:cc.Vec3, callback:Function){
+        this.Shadow.node.runAction(cc.sequence(cc.moveBy(0.1, cc.v2(10,10)), cc.callFunc(()=>{
+            this.Shadow.node.active = false;
+            this.node.active = false;
+            if (callback != null)
+                callback();
+        })));
+        this.node.runAction(cc.moveTo(0.1, dest.x, dest.y));
+
+        this.node.runAction(cc.scaleTo(0.1,1));
+    }
+
+    returnToOriginal(){
+        this.placeDown(this.startedPosition, null);
     }
 
     // update (dt) {}

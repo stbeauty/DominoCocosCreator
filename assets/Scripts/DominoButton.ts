@@ -46,8 +46,10 @@ export default class DominoButton extends cc.Button {
     }
 
     onTouchStart(touch, event){
-        this.RoundControl.onTouchStart(touch,event);
         this.RoundControl.PlayerDomino.setDomino(this.Domino.ID);
+        this.RoundControl.PlayerDomino.startedPosition = this.RoundControl.node.convertToNodeSpaceAR(this.node.parent.convertToWorldSpaceAR(this.node.position));
+        this.RoundControl.onTouchStart(touch,event);
+        
         this.BlackSprite.node.active = true;
     }
 
