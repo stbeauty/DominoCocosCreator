@@ -8,6 +8,9 @@
 const {ccclass, property} = cc._decorator;
 import Domino from "./Domino";
 import DominoDesk from "./DominoDesk";
+import NodePosition from "./NodePosition";
+import Tools from "./Tools";
+
 
 @ccclass
 export default class RoundController extends cc.Component {
@@ -42,23 +45,55 @@ export default class RoundController extends cc.Component {
 
     onTouchMove(touch, event){
         this.PlayerDomino.node.position  = this.node.convertToNodeSpaceAR(touch.getLocation());
+
+        var domi = this.Desk.checkCanPlace(this.PlayerDomino);
+
+        
+
+        
+        if (domi != null && domi.isRoot==false){
+            this.PlayerDomino.node.opacity = 255;
+            var rotate = -1;
+            if (domi.ID == this.PlayerDomino.ID[1])
+                rotate = 1;
+            var pos = Tools.WorldPos(this.PlayerDomino.node);
+            if (pos.y < domi.Position.y - 35 && domi.BOT){
+                
+                this.PlayerDomino.node.angle = rotate*90;
+            } else if (pos.y > domi.Position.y + 35 && domi.TOP){
+                this.PlayerDomino.node.angle = -90*rotate;
+            } else {
+                if ((rotate > 0 && domi.RIGHT) || (rotate < 0 && domi.LEFT))
+                this.PlayerDomino.node.angle = 180;
+                else
+                this.PlayerDomino.node.angle = 0;
+            }
+        } else {
+            this.PlayerDomino.node.angle = 0;
+            this.PlayerDomino.node.opacity = 128;
+        }
+
     }
 
     onTouchEnd(touch, event){
-        //this.PlayerDomino.node.active = false;
+
         var domi = this.Desk.checkCanPlace(this.PlayerDomino);
 
-        if (domi == this.PlayerDomino){
-
-            this.PlayerDomino.placeDown(this.Desk.node.position, ()=>{
-                this.Desk.place(this.PlayerDomino.ID,this.node.convertToWorldSpaceAR(this.Desk.node.position));
-            });
-
-            
-        } else if (domi == null){
+        if (domi == null){
             this.PlayerDomino.returnToOriginal();
-        } else {
+        }
+        else if (domi.isRoot){
 
+            this.PlayerDomino.placeDown(Tools.WorldPos(this.Desk.node), ()=>{
+                this.Desk.place(this.PlayerDomino, domi, new NodePosition);
+            });
+            
+        
+        } else {
+            var pos = this.Desk.findAbsolutePos(this.PlayerDomino, domi);
+            this.PlayerDomino.placeDown(pos.Position, ()=>{
+                this.Desk.place(this.PlayerDomino, domi,pos);
+            });
         }
 
         

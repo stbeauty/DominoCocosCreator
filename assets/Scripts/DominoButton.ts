@@ -7,6 +7,7 @@
 
 import RoundController from "./RoundController";
 import Domino from "./Domino";
+import Tools from "./Tools";
 
 const {ccclass, property} = cc._decorator;
 
@@ -47,7 +48,8 @@ export default class DominoButton extends cc.Button {
 
     onTouchStart(touch, event){
         this.RoundControl.PlayerDomino.setDomino(this.Domino.ID);
-        this.RoundControl.PlayerDomino.startedPosition = this.RoundControl.node.convertToNodeSpaceAR(this.node.parent.convertToWorldSpaceAR(this.node.position));
+        this.RoundControl.PlayerDomino.startedPosition = Tools.WorldPos(this.node);
+        this.RoundControl.PlayerDomino.rootBtn = this;
         this.RoundControl.onTouchStart(touch,event);
         
         this.BlackSprite.node.active = true;
@@ -68,11 +70,15 @@ export default class DominoButton extends cc.Button {
     }
 
     start () {
+        this.draw();
+
+       
+    }
+
+    draw(){
         this.Domino.setDomino(this.RoundControl.drawDonimo());
         this.BlackSprite.node.active = false;
         this.BlankSprite.node.active = false;
-
-       
     }
 
     // update (dt) {}

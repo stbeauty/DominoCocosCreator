@@ -5,6 +5,8 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
+import DominoButton from "./DominoButton";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -19,6 +21,8 @@ export default class Domino extends cc.Component {
     rootDomi:Domino = null;
     avaiID:string = "";
     // onLoad () {}
+
+    rootBtn:DominoButton = null;
 
     start () {
 
@@ -49,8 +53,13 @@ export default class Domino extends cc.Component {
             this.node.active = false;
             if (callback != null)
                 callback();
+
+            if (this.rootBtn!=null)
+            this.rootBtn.draw();
         })));
-        this.node.runAction(cc.moveTo(0.1, dest.x, dest.y));
+
+        var d = this.node.parent.convertToNodeSpaceAR(dest);
+        this.node.runAction(cc.moveTo(0.1, d.x, d.y));
 
         this.node.runAction(cc.scaleTo(0.1,1));
     }
