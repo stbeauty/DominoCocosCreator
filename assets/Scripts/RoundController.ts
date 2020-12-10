@@ -5,10 +5,10 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 import Domino from "./Domino";
 import DominoDesk from "./DominoDesk";
-import NodePosition from "./NodePosition";
+import DomiTransform from "./DomiTransform";
 import Tools from "./Tools";
 
 
@@ -20,100 +20,99 @@ export default class RoundController extends cc.Component {
     @property
     Deck: string[] = [];
 
-    @property (Domino)
+    @property(Domino)
     PlayerDomino: Domino;
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad () {
+    onLoad() {
         this.initDeck();
 
         // this.node.on('touchstart', this.onTouchStart, this);
-    
+
         // this.node.on('touchmove', this.onTouchMove, this);
-    
+
         // this.node.on('touchend', this.onTouchEnd, this);
-        
+
     }
 
-    onTouchStart(touch, event){
+    onTouchStart(touch, event) {
         this.PlayerDomino.node.active = true;
 
-        this.PlayerDomino.node.position  = this.node.convertToNodeSpaceAR(touch.getLocation());
+        this.PlayerDomino.node.position = this.node.convertToNodeSpaceAR(touch.getLocation());
         this.PlayerDomino.liftUp();
     }
 
-    onTouchMove(touch, event){
-        this.PlayerDomino.node.position  = this.node.convertToNodeSpaceAR(touch.getLocation());
+    onTouchMove(touch, event) {
+        this.PlayerDomino.node.position = this.node.convertToNodeSpaceAR(touch.getLocation());
 
-        var domi = this.Desk.checkCanPlace(this.PlayerDomino);
+        var node = this.Desk.checkCanPlace(this.PlayerDomino);
 
-        
-
-        
-        if (domi != null && domi.isRoot==false){
-            this.PlayerDomino.node.opacity = 255;
-            var rotate = -1;
-            if (domi.ID == this.PlayerDomino.ID[1])
-                rotate = 1;
-            var pos = Tools.WorldPos(this.PlayerDomino.node);
-            if (pos.y < domi.Position.y - 35 && domi.BOT){
-                
-                this.PlayerDomino.node.angle = rotate*90;
-            } else if (pos.y > domi.Position.y + 35 && domi.TOP){
-                this.PlayerDomino.node.angle = -90*rotate;
-            } else {
-                if ((rotate > 0 && domi.RIGHT) || (rotate < 0 && domi.LEFT))
-                this.PlayerDomino.node.angle = 180;
-                else
-                this.PlayerDomino.node.angle = 0;
-            }
+        if (node != null) {
+            if (node.isRoot == false) {
+                var transform = new DomiTransform(this.PlayerDomino, node);
+                if (transform.Valid) {
+                    this.PlayerDomino.node.opacity = 255;
+                    this.PlayerDomino.node.angle = transform.Angle;
+                } else {
+                    this.PlayerDomino.node.angle = 0;
+                    this.PlayerDomino.node.opacity = 128;
+                }
+            } else this.PlayerDomino.node.opacity = 255;
         } else {
             this.PlayerDomino.node.angle = 0;
             this.PlayerDomino.node.opacity = 128;
         }
 
+
+
     }
 
-    onTouchEnd(touch, event){
+    onTouchEnd(touch, event) {
 
-        var domi = this.Desk.checkCanPlace(this.PlayerDomino);
+        var node = this.Desk.checkCanPlace(this.PlayerDomino);
+        console.log(node);
 
-        if (domi == null){
+        if (node == null) {
             this.PlayerDomino.returnToOriginal();
         }
-        else if (domi.isRoot){
+        else if (node.isRoot) {
 
-            this.PlayerDomino.placeDown(Tools.WorldPos(this.Desk.node), ()=>{
-                this.Desk.place(this.PlayerDomino, domi, new NodePosition);
+            this.PlayerDomino.placeDown(Tools.WorldPos(this.Desk.node), () => {
+                this.Desk.placeRoot(this.PlayerDomino.ID);
             });
-            
-        
+
+
         } else {
-            var pos = this.Desk.findAbsolutePos(this.PlayerDomino, domi);
-            this.PlayerDomino.placeDown(pos.Position, ()=>{
-                this.Desk.place(this.PlayerDomino, domi,pos);
+
+            var transform = new DomiTransform(this.PlayerDomino, node);
+            if (transform.Valid){
+
+            this.PlayerDomino.placeDown(transform.Position, () => {
+                this.Desk.place(transform);
             });
+            } else
+            this.PlayerDomino.returnToOriginal();
         }
 
-        
+
     }
 
     initDeck() {
         this.Deck = [];
-        this.Deck.push("00","10","20","30","40","50","60","11","21","31","41","51","61","22","32","42","52","62","33","43","53","63","44","54","64","55","65","66");
+        this.Deck.push("00", "10", "20", "30", "40", "50", "60", "11", "21", "31", "41", "51", "61", "22", "32", "42", "52", "62", "33", "43", "53", "63", "44", "54", "64", "55", "65", "66");
     }
 
-    drawDonimo():string{
+    drawDonimo(): string {
         if (this.Deck.length <= 0)
             return "";
         var chosenIdx = Math.floor(Math.random() * (this.Deck.length - 1));
         var chosenDo = this.Deck[chosenIdx];
-        this.Deck.splice(chosenIdx,1);
+        this.Deck.splice(chosenIdx, 1);
         return chosenDo;
     }
 
-    start () {
+    start() {
         this.PlayerDomino.node.active = false;
         //this.PlayerDomino.node.position.x 
     }

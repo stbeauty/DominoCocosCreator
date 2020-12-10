@@ -5,7 +5,9 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
+import { Direction } from "./Direction";
 import Domino from "./Domino";
+import DominoDesk from "./DominoDesk";
 import Tools from "./Tools";
 
 const {ccclass, property} = cc._decorator;
@@ -18,8 +20,11 @@ export default class DomiNode {
     LEFT:boolean = true;
     RIGHT:boolean = true;
     ID:string = "";
+    RootDirection:Direction = Direction.LEFT;
+    Desk: DominoDesk = null;
 
     isRoot : boolean = false;
+    isDouble :boolean = false;
 
     neighbors:DomiNode[] = [];
 
@@ -27,10 +32,7 @@ export default class DomiNode {
         var pos = Tools.WorldPos(domi.node);
         if ((domi.ID[0] == this.ID || domi.ID[1] == this.ID) && cc.Vec3.distance(this.Position, pos) < 150)
             if (this.TOP || this.BOT || this.LEFT || this.RIGHT){
-                if (this.RIGHT && pos.x >= this.Position.x -35)
-                    return true;
-                    if (this.LEFT && pos.x < this.Position.x +35)
-                    return true;
+                return true;
             }
         return false;
     }

@@ -51,11 +51,13 @@ export default class Domino extends cc.Component {
         this.Shadow.node.runAction(cc.sequence(cc.moveBy(0.1, cc.v2(10,10)), cc.callFunc(()=>{
             this.Shadow.node.active = false;
             this.node.active = false;
-            if (callback != null)
+            if (callback != null){
                 callback();
+                if (this.rootBtn!=null)
+                    this.rootBtn.draw();
+            }
 
-            if (this.rootBtn!=null)
-            this.rootBtn.draw();
+            
         })));
 
         var d = this.node.parent.convertToNodeSpaceAR(dest);
