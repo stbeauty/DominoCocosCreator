@@ -9,18 +9,15 @@ import RoundController from "./RoundController";
 import Domino from "./Domino";
 import Tools from "./Tools";
 
+
 const {ccclass, property} = cc._decorator;
 
-enum DominoBtnState{
-    BLANK,
-    BLACK,
-    DOMINO
-}
+
 
 @ccclass
 export default class DominoButton extends cc.Button {
 
-    @property(RoundController)
+    //@property(RoundController)
     RoundControl: RoundController;
 
     @property(Domino)
@@ -31,8 +28,6 @@ export default class DominoButton extends cc.Button {
 
     @property(cc.Sprite)
     BlankSprite: cc.Sprite;
-
-    state: DominoBtnState = DominoBtnState.BLANK;
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -47,6 +42,8 @@ export default class DominoButton extends cc.Button {
     }
 
     onTouchStart(touch, event){
+        if (this.RoundControl.isPlayerTurn == false)
+        return;
         this.RoundControl.PlayerDomino.setDomino(this.Domino.ID);
         this.RoundControl.PlayerDomino.startedPosition = Tools.WorldPos(this.node);
         this.RoundControl.PlayerDomino.rootBtn = this;
@@ -56,26 +53,32 @@ export default class DominoButton extends cc.Button {
     }
 
     onTouchMove(touch, event){
+        if (this.RoundControl.isPlayerTurn == false)
+        return;
         this.RoundControl.onTouchMove(touch,event);
     }
 
     onTouchEnd(touch, event){
+        if (this.RoundControl.isPlayerTurn == false)
+        return;
         this.RoundControl.onTouchEnd(touch,event);
         this.BlackSprite.node.active = false;
     }
 
     onTouchCancel(touch, event){
+        if (this.RoundControl.isPlayerTurn == false)
+        return;
         this.RoundControl.onTouchEnd(touch,event);
         this.BlackSprite.node.active = false;
     }
 
     start () {
-        this.draw();
+        //this.draw();
 
        
     }
 
-    draw(){
+    setDomino(){
         this.Domino.setDomino(this.RoundControl.drawDonimo());
         this.BlackSprite.node.active = false;
         this.BlankSprite.node.active = false;

@@ -25,6 +25,7 @@ export default class DomiNode {
 
     isRoot : boolean = false;
     isDouble :boolean = false;
+    isActive : boolean = true;
 
     neighbors:DomiNode[] = [];
 
@@ -38,10 +39,30 @@ export default class DomiNode {
     }
 
     Disable(){
+        if (this.isRoot == false){
         this.TOP = false;
         this.BOT = false;
         this.LEFT = false;
         this.RIGHT = false;
+        this.isActive = false;
+        } else {
+            this.neighbors.forEach(node => {
+                switch (node.RootDirection){
+                    case Direction.TOP:
+                        this.BOT = false;
+                        break;
+                        case Direction.BOT:
+                        this.TOP = false;
+                        break;
+                        case Direction.RIGHT:
+                        this.LEFT = false;
+                        break;
+                        case Direction.LEFT:
+                        this.RIGHT = false;
+                        break;
+                }
+            })
+        }
     }
 
     MakeFriends(node: DomiNode){

@@ -94,9 +94,24 @@ export default class DominoDesk extends cc.Component {
         var domi = cc.instantiate(this.DominoPrefab).getComponent(Domino);
         domi.node.setParent(this.node);
         domi.setDomino(ID);
+        //domi.node.angle = 90;
 
 
-        // Left
+        
+
+        if (domi.ID[0] == domi.ID[1]) {
+            var dnodeC = new DomiNode();
+            dnodeC.ID = domi.ID[0];
+            dnodeC.Position = Tools.WorldPos(domi.node);
+            dnodeC.Desk = this;
+            dnodeC.isDouble = true;
+            dnodeC.isRoot = true;
+            this.DominoList.push(dnodeC);
+
+
+        } else {
+
+            // Left
         var dnodeL = new DomiNode();
         dnodeL.ID = domi.ID[0];
         dnodeL.RIGHT = false;
@@ -113,19 +128,6 @@ export default class DominoDesk extends cc.Component {
         dnodeR.Desk = this;
         this.DominoList.push(dnodeR);
 
-        if (domi.ID[0] == domi.ID[1]) {
-            var dnodeC = new DomiNode();
-            dnodeC.ID = domi.ID[0];
-            dnodeC.LEFT = false;
-            dnodeC.RIGHT = false;
-            dnodeC.Position = Tools.WorldPos(domi.node);
-            dnodeC.Desk = this;
-            this.DominoList.push(dnodeC);
-
-            dnodeC.MakeFriends(dnodeL);
-            dnodeC.MakeFriends(dnodeR);
-
-        } else {
             dnodeL.MakeFriends(dnodeR);
         }
     }

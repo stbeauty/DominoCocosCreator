@@ -53,8 +53,10 @@ export default class Domino extends cc.Component {
             this.node.active = false;
             if (callback != null){
                 callback();
-                if (this.rootBtn!=null)
-                    this.rootBtn.draw();
+                if (this.rootBtn!=null){
+                    //this.rootBtn.draw();
+                    this.rootBtn.BlackSprite.node.active = true;
+                }
             }
 
             

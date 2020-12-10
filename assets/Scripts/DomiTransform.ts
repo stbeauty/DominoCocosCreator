@@ -68,14 +68,14 @@ export default class DomiTransform {
                 case Direction.TOP:
 
                     newnode.BOT = false;
-                    node.neighbors.forEach(n => { n.TOP = false });
+                    node.neighbors.forEach(n => {if (!n.isRoot) n.TOP = false });
                     newnode.Position = this.Position.add(cc.v3(0, 35, 0));
                     break;
                 case Direction.TOP_RIGHT:
 
                     newnode.BOT = false;
                     newnode.LEFT = false;
-                    node.neighbors.forEach(n => { n.TOP = false });
+                    node.neighbors.forEach(n => { if (!n.isRoot) n.TOP = false });
                     if (this.isPortrait())
                         newnode.Position = this.Position.add(cc.v3(0, 35, 0));
                     else
@@ -88,7 +88,7 @@ export default class DomiTransform {
                 case Direction.RIGHT_BOT:
                     newnode.TOP = false;
                     newnode.LEFT = false;
-                    node.neighbors.forEach(n => { n.BOT = false });
+                    node.neighbors.forEach(n => { if (!n.isRoot) n.BOT = false });
                     if (this.isPortrait())
                         newnode.Position = this.Position.add(cc.v3(0, -35, 0));
                     else
@@ -96,13 +96,13 @@ export default class DomiTransform {
                     break;
                 case Direction.BOT:
                     newnode.TOP = false;
-                    node.neighbors.forEach(n => { n.BOT = false });
+                    node.neighbors.forEach(n => { if (!n.isRoot) n.BOT = false });
                     newnode.Position = this.Position.add(cc.v3(0, -35, 0));
                     break;
                 case Direction.BOT_LEFT:
                     newnode.TOP = false;
                     newnode.RIGHT = false;
-                    node.neighbors.forEach(n => { n.BOT = false });
+                    node.neighbors.forEach(n => { if (!n.isRoot) n.BOT = false });
                     if (this.isPortrait())
                         newnode.Position = this.Position.add(cc.v3(0, -35, 0));
                     else
@@ -115,7 +115,7 @@ export default class DomiTransform {
                 case Direction.LEFT_TOP:
                     newnode.RIGHT = false;
                     newnode.BOT = false;
-                    node.neighbors.forEach(n => { n.TOP = false });
+                    node.neighbors.forEach(n => {if (!n.isRoot) n.TOP = false });
                     if (this.isPortrait())
                         newnode.Position = this.Position.add(cc.v3(0, 35, 0));
                     else
@@ -192,10 +192,11 @@ export default class DomiTransform {
                 case Direction.TOP:
                     if (node.TOP) {
                         this.setPortrait();
-                        if (node.isDouble == false)
+                        if (node.isDouble == false || (node.isDouble && (node.RootDirection == Direction.BOT|| node.isRoot)))
                         this.definePosition(0, 3);
                         else
                         this.definePosition(0, 4);
+                        
                     }
                     break;
                 case Direction.TOP_RIGHT:
@@ -212,10 +213,11 @@ export default class DomiTransform {
                 case Direction.RIGHT:
                     if (node.RIGHT) {
                         this.setLanscape();
-                        if (node.isDouble == false)
+                        if (node.isDouble == false|| (node.isDouble && (node.RootDirection == Direction.LEFT|| node.isRoot)))
                         this.definePosition(3, 0);
                         else
                         this.definePosition(4, 0);
+                        
                     }
                     break;
                 case Direction.RIGHT_BOT:
@@ -232,10 +234,11 @@ export default class DomiTransform {
                 case Direction.BOT:
                     if (node.BOT) {
                         this.setPortrait(false);
-                        if (node.isDouble == false)
+                        if (node.isDouble == false|| (node.isDouble && (node.RootDirection == Direction.TOP|| node.isRoot)))
                         this.definePosition(0, -3);
                         else
                         this.definePosition(0, -4);
+                        
                     }
                     break;
                 case Direction.BOT_LEFT:
@@ -252,7 +255,7 @@ export default class DomiTransform {
                 case Direction.LEFT:
                     if (node.LEFT) {
                         this.setLanscape(true);
-                        if (node.isDouble == false)
+                        if (node.isDouble == false|| (node.isDouble && (node.RootDirection == Direction.RIGHT|| node.isRoot)))
                         this.definePosition(-3, 0);
                         else
                         this.definePosition(-4, 0);
