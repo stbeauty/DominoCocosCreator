@@ -42,8 +42,6 @@ export default class RoundController extends cc.Component {
 
     CurrentCountDown: cc.ProgressBar = null;
 
-
-
     // LIFE-CYCLE CALLBACKS:
 
     LeftAI: GameAI = null;
@@ -75,8 +73,6 @@ export default class RoundController extends cc.Component {
 
         this.RightAI = new GameAI();
         this.RightAI.RoundControl = this;
-
-
         
     }
 
@@ -202,6 +198,10 @@ export default class RoundController extends cc.Component {
     }
 
     update(dt) {
+        
+    }
+
+    localAIGame(dt:any){
         this.countDown -= dt;
 
         if (this.state == RoundState.PLAYING) {

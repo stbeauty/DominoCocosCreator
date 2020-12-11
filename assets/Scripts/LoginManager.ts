@@ -5,8 +5,16 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
+import GameManager from "./GameManager";
+
+
 const {ccclass, property} = cc._decorator;
 
+enum LoginState{
+    IDLE,
+    LOGGED_IN,
+    JOINED_IN,
+}
 @ccclass
 export default class LoginManager extends cc.Component {
 
@@ -24,6 +32,8 @@ export default class LoginManager extends cc.Component {
 
     @property(cc.Button)
     PlayBtn: cc.Button = null;
+
+    state:LoginState = LoginState.IDLE;
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -45,15 +55,49 @@ export default class LoginManager extends cc.Component {
             }
         )));
 
+            //var Game:GameManager = new GameManager();
+            //Game.Connect();
+            //var photon = new PhotonClient();
+            //photon.connectToRegionMaster("EU");
+
         this.LoginBtn.node.on('click',()=>{
-            this.LoginNode.active = false;
-            this.MainMenuNode.active = true;
+
+             //if (GameManager.Instance().Net.IsLogginPressed())
+              //   return;
+
+                 GameManager.Instance().Net.myActor().setName("ABC");
+
+            // NetClient.DConnect;
+            
+            GameManager.Instance().Net.DConnect();
+
+            
         });
 
         this.PlayBtn.node.on('click', ()=>{
-            cc.director.loadScene("Main");
+            if (GameManager.Instance().Net.availableRooms.length > 0)
+            GameManager.Instance().Net.joinRandomRoom();
+                else
+                GameManager.Instance().Net.createRoom(GameManager.Instance().Net.myActor().name);
         });
     }
 
-    // update (dt) {}
+    update (dt) {
+        switch (this.state){
+            case LoginState.IDLE:
+                if (GameManager.Instance().Net.isInLobby()){
+                    this.LoginNode.active = false;
+                    this.MainMenuNode.active = true;
+                    this.state = LoginState.LOGGED_IN;
+                }
+                break;
+                case LoginState.LOGGED_IN:
+                    if (GameManager.Instance().Net.isJoinedToRoom()){
+                        cc.director.loadScene("Main");
+                        this.state = LoginState.JOINED_IN;
+                    }
+                break;
+        }
+
+    }
 }

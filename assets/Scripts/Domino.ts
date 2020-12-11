@@ -12,6 +12,7 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class Domino extends cc.Component {
 
+
     @property (cc.Sprite)
     Shadow:cc.Sprite = null;
 

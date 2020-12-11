@@ -6,22 +6,25 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 
+export default class GameManager {
 
-const {ccclass, property} = cc._decorator;
+   static _instance:GameManager = null;
 
-@ccclass
-export default class NewClass extends cc.Component {
+   static Instance() : GameManager{
+        if (this._instance == null)
+        this._instance = new GameManager();
+        return this._instance;
+   }
 
+   Net = null;
+
+constructor(){
+
+    this.Net = new PhotonClient();
     
+//var aa=NetClient;
+    //this.photonClient.game = this;
+}
 
 
-    // LIFE-CYCLE CALLBACKS:
-
-    // onLoad () {}
-
-    start () {
-
-    }
-
-    // update (dt) {}
 }

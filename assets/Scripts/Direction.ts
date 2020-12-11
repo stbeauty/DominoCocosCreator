@@ -15,4 +15,5 @@ export enum Direction{
     LEFT,
     LEFT_TOP,
     OUT
+    
 }
