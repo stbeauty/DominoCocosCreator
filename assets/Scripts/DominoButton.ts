@@ -78,8 +78,8 @@ export default class DominoButton extends cc.Button {
        
     }
 
-    setDomino(){
-        this.Domino.setDomino(this.RoundControl.drawDonimo());
+    setDomino(id:string){
+        this.Domino.setDomino(id);
         this.BlackSprite.node.active = false;
         this.BlankSprite.node.active = false;
     }

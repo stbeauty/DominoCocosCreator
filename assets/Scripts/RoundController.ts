@@ -11,10 +11,18 @@ import DominoButton from "./DominoButton";
 import DominoDesk from "./DominoDesk";
 import DomiTransform from "./DomiTransform";
 import GameAI from "./GameAI";
+import GameManager from "./GameManager";
+import Player from "./Player";
 import { RoundState } from "./RoundState";
 import Tools from "./Tools";
+import User from "./User";
 
-
+enum EventCode{
+    START,
+    DOMINO_PACK,
+    TURN,
+    PLAY,
+}
 @ccclass
 export default class RoundController extends cc.Component {
     @property(DominoDesk)
@@ -31,25 +39,27 @@ export default class RoundController extends cc.Component {
     @property({ type: [DominoButton] })
     DomiButtons: DominoButton[] = [];
 
-    @property(cc.ProgressBar)
-    PlayerCountDown: cc.ProgressBar = null;
-    @property(cc.ProgressBar)
-    LeftCountDown: cc.ProgressBar = null;
-    @property(cc.ProgressBar)
-    TopCountDown: cc.ProgressBar = null;
-    @property(cc.ProgressBar)
-    RightCountDown: cc.ProgressBar = null;
+    @property(User)
+    LeftPlayer: User = null;
+    @property(User)
+    TopPlayer: User = null;
+    @property(User)
+    RightPlayer: User = null;
+    @property(Player)
+    Player: Player = null;
 
-    CurrentCountDown: cc.ProgressBar = null;
+    OtherPlayers:User[] = [];
+    PlayingPlayers:User[] = [];
+    
+
+    @property(cc.Button)
+    ManualStart:cc.Button = null;
+
+    Net: PhotonClient = null;
+
+    isHost:boolean = false;
 
     // LIFE-CYCLE CALLBACKS:
-
-    LeftAI: GameAI = null;
-    TopAI: GameAI = null;
-    RightAI: GameAI = null;
-    CurrentAI: GameAI = null;
-    isPlayerTurn = false;
-
 
     @property(cc.RichText)
     statusTxt: cc.RichText = null;
@@ -57,23 +67,22 @@ export default class RoundController extends cc.Component {
     state: RoundState = RoundState.STAND_BY;
     TIMEINTERVAL: number = 10;
 
-    countDown: number = 2;
-    AITime: number = 0;
+    currentPlayer: number = 0;
+    countDown: number = 0;
+
 
     onLoad() {
         this.initDeck();
 
         this.DomiButtons.forEach(btn => btn.RoundControl = this);
 
-        this.LeftAI = new GameAI();
-        this.LeftAI.RoundControl = this;
+        this.Net = GameManager.Instance().Net;
 
-        this.TopAI = new GameAI();
-        this.TopAI.RoundControl = this;
+        this.OtherPlayers.push(this.LeftPlayer);
+        this.OtherPlayers.push(this.TopPlayer);
+        this.OtherPlayers.push(this.RightPlayer);
 
-        this.RightAI = new GameAI();
-        this.RightAI.RoundControl = this;
-        
+        this.OtherPlayers.forEach(player => player.node.active = false);
     }
 
     onTouchStart(touch, event) {
@@ -120,7 +129,7 @@ export default class RoundController extends cc.Component {
 
             this.PlayerDomino.placeDown(Tools.WorldPos(this.Desk.node), () => {
                 this.Desk.placeRoot(this.PlayerDomino.ID);
-                this.nextTurn();
+                //this.nextTurn();
             });
 
 
@@ -131,10 +140,10 @@ export default class RoundController extends cc.Component {
 
                 this.PlayerDomino.placeDown(transform.Position, () => {
                     this.Desk.place(transform);
-                    this.nextTurn();
+                    //this.nextTurn();
                 });
 
-                
+
             } else
                 this.PlayerDomino.returnToOriginal();
         }
@@ -157,113 +166,212 @@ export default class RoundController extends cc.Component {
     }
 
     start() {
+
+        this.ManualStart.node.on('click', ()=>{
+            this.ManualStart.node.active = false;
+
+            this.PlayingPlayers.push(this.Player);
+            if (this.LeftPlayer.netActor)
+                this.PlayingPlayers.push(this.LeftPlayer);
+                if (this.TopPlayer.netActor)
+                this.PlayingPlayers.push(this.TopPlayer);
+                if (this.RightPlayer.netActor)
+                this.PlayingPlayers.push(this.RightPlayer);
+
+            this.Net.myRoom().setIsOpen(false);
+            this.Net.raiseEvent(EventCode.START);
+            
+            var pack1:string[] = [];
+            var pack2:string[] = [];
+            var pack3:string[] = [];
+            var pack4:string[] = [];
+            for (var i = 0; i < 7; i++) {
+                pack1.push(this.drawDonimo());
+                pack2.push(this.drawDonimo());
+                pack3.push(this.drawDonimo());
+                pack4.push(this.drawDonimo());
+            }
+
+            this.parseDominoPack(pack1);
+            if (this.LeftPlayer.netActor){
+                this.Net.raiseEvent(EventCode.DOMINO_PACK, pack2, {targetActors:[this.LeftPlayer.netActor.actorNr]});
+            }
+            if (this.TopPlayer.netActor){
+                this.Net.raiseEvent(EventCode.DOMINO_PACK, pack2, {targetActors:[this.TopPlayer.netActor.actorNr]});
+            }
+            if (this.RightPlayer.netActor){
+                this.Net.raiseEvent(EventCode.DOMINO_PACK, pack2, {targetActors:[this.RightPlayer.netActor.actorNr]});
+            }
+
+            this.Net.raiseEvent(EventCode.TURN, this.Net.myActor().actorNr);
+            this.currentPlayer = this.Net.myActor().actorNr;
+            this.countDown = 10;
+            this.Player.startCountDown(10);
+        });
+
         this.PlayerDomino.node.active = false;
-        this.statusTxt.string = "Preparing...";
+        this.statusTxt.string = "Waiting other players...";
         this.state = RoundState.STAND_BY;
 
-        this.LeftCountDown.progress = 0;
-        this.TopCountDown.progress = 0;
-        this.RightCountDown.progress = 0;
-        this.PlayerCountDown.progress = 0;
-    }
+        console.log(this.Net.myActor().name);
 
-    nextTurn() {
+        this.Player.reset(this.Net.myActor().name);
+        this.Player.netActor = this.Net.myActor();
+        this.updatePlayerCount();
 
-        this.CurrentCountDown.progress = 0;
-
-
-
-        if (this.isPlayerTurn) {
-            this.isPlayerTurn = false;
-            this.CurrentCountDown = this.LeftCountDown;
-            this.CurrentAI = this.LeftAI;
-
-        } else if (this.CurrentAI == this.LeftAI) {
-            this.CurrentCountDown = this.TopCountDown;
-            this.CurrentAI = this.TopAI;
-        } else if (this.CurrentAI == this.TopAI) {
-            this.CurrentCountDown = this.RightCountDown;
-            this.CurrentAI = this.RightAI;
-        } else if (this.CurrentAI == this.RightAI) {
-            this.CurrentCountDown = this.PlayerCountDown;
-            this.CurrentAI = null;
-            this.isPlayerTurn = true;
+        this.Net.onActorJoin = () => {
+            this.updatePlayerCount();
+        }
+        this.Net.onActorLeave = () => {
+            this.updatePlayerCount();
         }
 
-        if (this.isPlayerTurn == false)
-            this.AITime = Math.floor(Math.random() * 3) + 2;
-        this.CurrentCountDown.progress = 1;
-        this.countDown = this.TIMEINTERVAL;
-
-    }
-
-    update(dt) {
+        this.onEventSetup();
         
     }
 
-    localAIGame(dt:any){
-        this.countDown -= dt;
+    onEventSetup(){
+        this.Net.onEvent = (code, content, actorNR) => {
+            console.log(code + " " + content);
+            
+            switch (code) {
+                case EventCode.START:
+                    this.state = RoundState.SHUFFLE;
+                    break;
+                case EventCode.DOMINO_PACK:{
+                    var pack:string[] = content;
+                    this.parseDominoPack(pack);
+                    
 
-        if (this.state == RoundState.PLAYING) {
-            if (this.isPlayerTurn && this.countDown <= 0){
-                this.nextTurn();
-            } else {
-            this.AITime -= dt;
-            this.CurrentCountDown.progress = (this.countDown / this.TIMEINTERVAL);
+                    break;
+                }
+                case EventCode.TURN:
+                    var actor:number = content;
+                    if (actor == this.Net.myActor().actorNr)
+                        this.Player.startCountDown(10);
+                        else
+                        this.OtherPlayers.forEach(player=>{if (player.netActor && player.netActor.actorNr==actor) player.startCountDown(10)});
+                    break;
+            }
+        };
+    }
 
-            if (this.isPlayerTurn == false && this.AITime <= 0) {
-                this.CurrentAI.MakeMove();
-                this.nextTurn();
+    parseDominoPack(pack:string[]){
+        this.Player.parsePack(null);
+
+                    this.OtherPlayers.forEach (player => {if (player.netActor != null) player.parsePack(null);
+                        });
+
+        for (var i = 0;i < pack.length; i++)
+            this.DomiButtons[i].setDomino(pack[i]);
+    }
+
+    updatePlayerCount(){
+        this.isHost = (this.Net.myRoomMasterActorNr() == this.Net.myActor().actorNr);
+        this.ManualStart.node.active = (this.Net.myRoomActorCount() > 1 && this.isHost && this.state == RoundState.STAND_BY);
+        if (this.Net.myRoomActorCount() > 1)
+            this.updatePlayerPosition();
+    }
+
+    updatePlayerPosition() {
+        console.log("UpdatePlayerPosition");
+        
+        if (this.state != RoundState.STAND_BY)
+            return;
+
+        var players:Photon.LoadBalancing.Actor[] = this.Net.myRoomActorsArray();
+        //var m:Photon.LoadBalancing.Actor[]
+
+        if (players.length == 1)
+            return;
+            
+
+        var sortedPlayers:Photon.LoadBalancing.Actor[] = players.sort((obj1, obj2) => {
+            if (obj1.actorNr < obj2.actorNr) {
+                return 1;
+            }
+
+            if (obj1.actorNr > obj2.actorNr) {
+                return -1;
+            }
+
+            return 0;
+        });
+
+
+        var anchorIdx = 0;
+        for (var i = 0; i < sortedPlayers.length; i++){
+            if (sortedPlayers[i].actorNr == this.Net.myActor().actorNr) {
+                
+                anchorIdx = i;
+                break;
             }
         }
-        return;
 
+
+        this.LeftPlayer.node.active = false;
+        this.LeftPlayer.netActor = null;
+        this.TopPlayer.node.active = false;
+        this.TopPlayer.netActor = null;
+        this.RightPlayer.node.active = false;
+        this.RightPlayer.netActor = null;
+
+        anchorIdx++; if (anchorIdx >= sortedPlayers.length) anchorIdx = 0;
+
+        if (sortedPlayers.length == 2) {
+            
+            this.TopPlayer.node.active = true;
+            this.TopPlayer.reset(sortedPlayers[anchorIdx].name);
+            this.TopPlayer.netActor = sortedPlayers[anchorIdx];
+            return;
+        } else {
+            this.LeftPlayer.node.active = true;
+            this.LeftPlayer.reset(sortedPlayers[anchorIdx].name);
+            this.LeftPlayer.netActor = sortedPlayers[anchorIdx];
+            if (players.length >= 3) {
+
+                anchorIdx++; if (anchorIdx >= sortedPlayers.length) anchorIdx = 0;
+                this.TopPlayer.node.active = true;
+                this.TopPlayer.reset(sortedPlayers[anchorIdx].name);
+                this.TopPlayer.netActor = sortedPlayers[anchorIdx];
+            }
+
+            if (players.length >= 4) {
+
+                anchorIdx++; if (anchorIdx >= sortedPlayers.length) anchorIdx = 0;
+                this.RightPlayer.node.active = true;
+                this.RightPlayer.reset(sortedPlayers[anchorIdx].name);
+                this.RightPlayer.netActor = sortedPlayers[anchorIdx];
+            }
         }
+    }
 
-        if (this.countDown <= 0) {
-            switch (this.state) {
-                case RoundState.STAND_BY: {
-                    this.state = RoundState.SHUFFLE;
-                    this.statusTxt.string = "Shuffling...(animation later)";
-                    this.countDown = 1;
-                    break;
-                }
-                case RoundState.SHUFFLE: {
-                    this.state = RoundState.DEAL;
-                    this.statusTxt.string = "Dealing...(animation later)";
-                    this.countDown = 1;
 
-                    for (var i = 0; i < 7; i++) {
-                        this.LeftAI.deck.push(this.drawDonimo());
-                        this.RightAI.deck.push(this.drawDonimo());
-                        this.TopAI.deck.push(this.drawDonimo());
-                        this.DomiButtons[i].setDomino();
-
-                    }
-                    break;
-                }
-                case RoundState.DEAL: {
-                    this.state = RoundState.READY;
-                    this.statusTxt.string = "Your turn first, ready..";
-                    this.countDown = 1;
-                    break;
-                }
-                case RoundState.READY: {
-                    this.state = RoundState.PLAYING;
-                    this.statusTxt.string = "";
-                    this.countDown = this.TIMEINTERVAL;
-                    this.isPlayerTurn = true;
-                    this.CurrentCountDown = this.PlayerCountDown;
-                    this.CurrentCountDown.progress = 1.0;
-                    break;
-                }
-                // case RoundState.PLAYING: {
-                //     break;
-                // }
-                case RoundState.END: {
-                    break;
+    update(dt) {
+        if (this.isHost){
+            if (this.countDown > 0){
+                this.countDown -= dt;
+                if (this.countDown <= 0){
+                    this.nextPlayerTurn();
+                    this.countDown = 10;
                 }
             }
         }
     }
+
+    nextPlayerTurn(){
+        for (var i = 0; i<this.PlayingPlayers.length; i++)
+            if (this.currentPlayer == this.PlayingPlayers[i].netActor.actorNr)
+                break;
+        i++;
+        if (i >= this.PlayingPlayers.length)
+        i = 0;
+
+        var next = this.PlayingPlayers[i];
+
+        next.startCountDown(10);
+        this.currentPlayer = next.netActor.actorNr;
+        this.Net.raiseEvent(EventCode.TURN, next.netActor.actorNr);
+    }
+
 }

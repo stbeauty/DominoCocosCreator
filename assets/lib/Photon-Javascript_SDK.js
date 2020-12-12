@@ -4557,76 +4557,8 @@ var PhotonClient = /** @class */ (function (_super) {
         //this.connectToRegionMaster("EU");
         return _this;
     }
-
-    PhotonClient.prototype.IsLogginPressed = function() {
-                switch (this.state){
-            case Photon.LoadBalancing.LoadBalancingClient.State.Disconnected:
-            case Photon.LoadBalancing.LoadBalancingClient.State.Error:
-                case Photon.LoadBalancing.LoadBalancingClient.State.Uninitialized:
-                    return false;
-                
-            default:
-                return true;
-        }
-    };
-
-    PhotonClient.prototype.DConnect = function() {
-        this.connectToRegionMaster("EU");
-    };
-
-    PhotonClient.prototype.onError = function (errorCode, errorMsg) {
-        this.output("Error " + errorCode + ": " + errorMsg);
-    };
-    PhotonClient.prototype.onEvent = function (code, content, actorNr) {
-
-        this.logger.debug("onEvent", code, "content:", content, "actor:", actorNr);
-    };
-    PhotonClient.prototype.onStateChange = function (state) {
-        // "namespace" import for static members shorter acceess
-        //var LBC = Photon.LoadBalancing.LoadBalancingClient;
-
-       // var stateText = LBC.StateToName(state);
-        //console.log(stateText);
-
-    };
-
-
-    PhotonClient.prototype.onActorPropertiesChange = function (actor) {
-        this.updateRoomInfo();
-    };
-    PhotonClient.prototype.onMyRoomPropertiesChange = function () {
-        this.updateRoomInfo();
-    };
-    PhotonClient.prototype.onRoomListUpdate = function (rooms, roomsUpdated, roomsAdded, roomsRemoved) {
-        this.logger.info("Demo: onRoomListUpdate", rooms, roomsUpdated, roomsAdded, roomsRemoved);
-
-    };
-    PhotonClient.prototype.onRoomList = function (rooms) {
-
-        //this.output("Demo: Rooms total: " + rooms.length);
-
-    };
-    PhotonClient.prototype.onJoinRoom = function () {
-        //this.output("Game " + this.myRoom().name + " joined");
-
-    };
-    PhotonClient.prototype.onActorJoin = function (actor) {
-        //this.output("actor " + actor.actorNr + " joined");
-
-    };
-    PhotonClient.prototype.onActorLeave = function (actor) {
-        //this.output("actor " + actor.actorNr + " left");
-
-    };
-    PhotonClient.prototype.sendMessage = function (message) {
-        try {
-            this.raiseEvent(1, { message: message, senderName: "user" + this.myActor().actorNr });
-            this.output('me[' + this.myActor().actorNr + ']: ' + message, this.myActor().getCustomProperty("color"));
-        }
-        catch (err) {
-            this.output("error: " + err.message);
-        }
-    };
     
     return PhotonClient;
 }(Photon.LoadBalancing.LoadBalancingClient));
+
+var MyPhoton = Photon; 

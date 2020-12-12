@@ -35,6 +35,9 @@ export default class LoginManager extends cc.Component {
 
     state:LoginState = LoginState.IDLE;
 
+    @property(cc.EditBox)
+    PlayerName:cc.EditBox = null;
+
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {}
@@ -64,21 +67,21 @@ export default class LoginManager extends cc.Component {
 
              //if (GameManager.Instance().Net.IsLogginPressed())
               //   return;
-
-                 GameManager.Instance().Net.myActor().setName("ABC");
+            if (this.PlayerName.string == ""){
+                var name = "Player" + Math.floor(Math.random() * 1000);
+                GameManager.Instance().Net.myActor().setName(name);
+            } else
+                 GameManager.Instance().Net.myActor().setName(this.PlayerName.string);
 
             // NetClient.DConnect;
             
-            GameManager.Instance().Net.DConnect();
-
+            GameManager.Instance().Net.connectToRegionMaster("EU");
+            
             
         });
 
         this.PlayBtn.node.on('click', ()=>{
-            if (GameManager.Instance().Net.availableRooms.length > 0)
-            GameManager.Instance().Net.joinRandomRoom();
-                else
-                GameManager.Instance().Net.createRoom(GameManager.Instance().Net.myActor().name);
+            GameManager.Instance().JoinOrCreateRoom();
         });
     }
 

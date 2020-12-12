@@ -1970,3 +1970,9 @@ declare module Photon.Chat {
         static StateToName(value: number): string;
     }
 }
+class PhotonClient extends Photon.LoadBalancing.LoadBalancingClient{
+    constructor();
+    constructor(protocol: number, appId: string, appVersion: string);
+}
+
+let MyPhoton = Photon;
