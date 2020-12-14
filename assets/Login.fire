@@ -96,16 +96,16 @@
         "__id__": 104
       },
       {
-        "__id__": 419
+        "__id__": 421
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 442
+        "__id__": 444
       },
       {
-        "__id__": 443
+        "__id__": 445
       }
     ],
     "_prefab": null,
@@ -195,7 +195,7 @@
       "array": [
         0,
         0,
-        514.4190898479566,
+        523.079343885801,
         0,
         0,
         0,
@@ -1014,7 +1014,7 @@
       "__id__": 123
     },
     "AppendiceBtn": {
-      "__id__": 409
+      "__id__": 411
     },
     "HelpNode": {
       "__id__": 104
@@ -1041,22 +1041,22 @@
       "__id__": 76
     },
     "SettingBackBtn": {
-      "__id__": 416
+      "__id__": 418
     },
     "PrivacyBtn": {
-      "__id__": 438
+      "__id__": 440
     },
     "SoundBtn": {
-      "__id__": 433
+      "__id__": 435
     },
     "SoundOnNode": {
-      "__id__": 429
-    },
-    "SoundOffNode": {
       "__id__": 431
     },
+    "SoundOffNode": {
+      "__id__": 433
+    },
     "SettingNode": {
-      "__id__": 419
+      "__id__": 421
     },
     "PlayerName": {
       "__id__": 42
@@ -3104,7 +3104,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "00TEaPJJVJW5BDdlPzJlqm"
+    "_id": "5eXqlYAypLlJHcNeXuLVYt"
   },
   {
     "__type__": "cc.Label",
@@ -3137,7 +3137,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "f5BjoSldROopDbjBIYQT8R"
+    "_id": "5eZsAIiDxNF76vKKAJHjxY"
   },
   {
     "__type__": "cc.LabelOutline",
@@ -3155,7 +3155,7 @@
       "a": 255
     },
     "_width": 4,
-    "_id": "8bCrMHPMJB06pAdmT6XeQF"
+    "_id": "9bSuB53VhGw6cNhdRRIJ7t"
   },
   {
     "__type__": "cc.RichText",
@@ -4256,7 +4256,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "7ffMBO8wpMPLsBZtTBvoOM"
+    "_id": "ben1BgxSJKjIc9UodGmlp/"
   },
   {
     "__type__": "cc.Label",
@@ -4291,7 +4291,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "65aJ+j9ShId6DAyM/4O9mV"
+    "_id": "e6SubDY+dJtY1cwS5q7njH"
   },
   {
     "__type__": "cc.LabelOutline",
@@ -4309,7 +4309,7 @@
       "a": 255
     },
     "_width": 4,
-    "_id": "9eTzNb4cBP4oFl1013BMOV"
+    "_id": "f98hoW/JdM5IWJ7++GYCoR"
   },
   {
     "__type__": "cc.RichText",
@@ -4464,7 +4464,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "14VgDVtHdBToE/Io69Vg43"
+    "_id": "61F11Rs9hIPJSUEzU7JFUS"
   },
   {
     "__type__": "cc.Label",
@@ -4499,7 +4499,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "40FxaMerZOga/zRuIQNdyg"
+    "_id": "b6IrIIcElDqqF1euneGduw"
   },
   {
     "__type__": "cc.LabelOutline",
@@ -4517,7 +4517,7 @@
       "a": 255
     },
     "_width": 4,
-    "_id": "dfs1LbQbJGmqHUTwqUOAzM"
+    "_id": "a7+2jE5ghLLo7ormhtEiUv"
   },
   {
     "__type__": "cc.RichText",
@@ -4977,7 +4977,7 @@
       "__uuid__": "29158224-f8dd-4661-a796-1ffab537140e"
     },
     "_N$target": {
-      "__id__": 413
+      "__id__": 415
     },
     "_id": "2943fKf6VL3qYqdGr0igh4"
   },
@@ -4990,7 +4990,7 @@
     },
     "_children": [
       {
-        "__id__": 413
+        "__id__": 415
       }
     ],
     "_active": true,
@@ -5133,7 +5133,7 @@
         "__id__": 103
       }
     ],
-    "_active": false,
+    "_active": true,
     "_components": [],
     "_prefab": null,
     "_opacity": 255,
@@ -15851,7 +15851,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 412
+        "__id__": 414
       },
       {
         "__id__": 329
@@ -15923,10 +15923,10 @@
         "__id__": 328
       },
       {
-        "__id__": 410
+        "__id__": 412
       },
       {
-        "__id__": 411
+        "__id__": 413
       }
     ],
     "_prefab": null,
@@ -16132,7 +16132,7 @@
         "__id__": 334
       },
       {
-        "__id__": 406
+        "__id__": 408
       }
     ],
     "_active": true,
@@ -16413,12 +16413,15 @@
       },
       {
         "__id__": 403
+      },
+      {
+        "__id__": 405
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 405
+        "__id__": 407
       }
     ],
     "_prefab": null,
@@ -16432,8 +16435,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1900,
-      "height": 1335.6000000000001
+      "width": 1850,
+      "height": 1395.6000000000001
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -16477,7 +16480,7 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 336
@@ -16530,7 +16533,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "c9XXlXWdxOq65STnDwC6CC"
+    "_id": "d7OwfW4Z1F2KNJfGy+Vzgi"
   },
   {
     "__type__": "cc.Label",
@@ -16565,7 +16568,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "cb82+fwuBP/YHoC7K0tknp"
+    "_id": "57i0zMp9VK3bHd7O7qUnBn"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -16575,7 +16578,7 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 338
@@ -16628,7 +16631,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "23XGGh4wtMXZkmkkrC72xA"
+    "_id": "0f53Gslq5CxKDxNTKiHb1x"
   },
   {
     "__type__": "cc.Label",
@@ -16663,7 +16666,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "c057x9S/xCf4u9/W8x0yDg"
+    "_id": "c9/v7GaetHpIOUr8sAH2j/"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -16673,7 +16676,7 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 340
@@ -16726,7 +16729,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "b7QfiIdbVKmpK8BlmckPTD"
+    "_id": "294v4QrsdNq5WgEO0EPb8/"
   },
   {
     "__type__": "cc.Label",
@@ -16761,7 +16764,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "a3NgsBzx9IxqjP+JBszUtr"
+    "_id": "681IgIFA5Nsr+V3NvqDorD"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -16771,7 +16774,7 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 342
@@ -16824,7 +16827,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "3dMH6ZCXhINa3Zf2wp0wQR"
+    "_id": "c2kya1J/xPO6qt6y83cVfS"
   },
   {
     "__type__": "cc.Label",
@@ -16859,7 +16862,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "fbrpkrYJ9AOKi4e25uI/hq"
+    "_id": "cfucfQR05CIoiehwVt0I6J"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -16869,7 +16872,7 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 344
@@ -16922,7 +16925,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "52QVr77ilKb5T6Z1mKiBUt"
+    "_id": "d6w+p3m+pLbJgEdPT+eiM6"
   },
   {
     "__type__": "cc.Label",
@@ -16957,7 +16960,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "d3aiDciSRAPaQvown3LV+E"
+    "_id": "99TOS2QuJMGZLz0yAByMT0"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -16967,7 +16970,7 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 346
@@ -17020,7 +17023,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "91ikIABvlFw4Tk0lw+kABh"
+    "_id": "7c4ObyjKFF/LMV6Ad1LJnG"
   },
   {
     "__type__": "cc.Label",
@@ -17055,7 +17058,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "726/cI/gxBZpWXUERjRoQM"
+    "_id": "04NANhIeJH+b7wtZTmcyX/"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -17065,7 +17068,7 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 348
@@ -17118,7 +17121,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "1enlxc7LZAuK5X+Lv2EUL8"
+    "_id": "770auwfp1MupSJBmW1XtJy"
   },
   {
     "__type__": "cc.Label",
@@ -17153,7 +17156,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "6fcLVOjGdI2L3ROlrjF/Ui"
+    "_id": "c53pqctINO8rIFfIvsh6kM"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -17163,7 +17166,7 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 350
@@ -17180,7 +17183,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1573.46,
+      "width": 1522.75,
       "height": 75.6
     },
     "_anchorPoint": {
@@ -17216,7 +17219,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "62DpCQecNGD6//BE5SFsla"
+    "_id": "b4orqW71JECpw1hoO5ylsl"
   },
   {
     "__type__": "cc.Label",
@@ -17233,8 +17236,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "  = Is (4) Four Players per table, drawing (7) Seven Domino Tiles each. Here at ",
-    "_N$string": "  = Is (4) Four Players per table, drawing (7) Seven Domino Tiles each. Here at ",
+    "_string": "  = Is (4) Four Players per table, drawing (7) Seven Domino Tiles each. Here ",
+    "_N$string": "  = Is (4) Four Players per table, drawing (7) Seven Domino Tiles each. Here ",
     "_fontSize": 38,
     "_lineHeight": 60,
     "_enableWrapText": true,
@@ -17251,7 +17254,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "dcAP+YKLpH954eiuGoM5W3"
+    "_id": "4fS5Ysw+NCba5jX4gvln17"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -17261,7 +17264,7 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 352
@@ -17278,7 +17281,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1041.44,
+      "width": 1092.15,
       "height": 75.6
     },
     "_anchorPoint": {
@@ -17314,7 +17317,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "56+MsWMxlOwrUpvF2b+yto"
+    "_id": "a7k4RRLgBKPYWqcqbRRdmA"
   },
   {
     "__type__": "cc.Label",
@@ -17331,8 +17334,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "the “DCS” there are (NO TEAMS) or (ONE-ON-ONE)",
-    "_N$string": "the “DCS” there are (NO TEAMS) or (ONE-ON-ONE)",
+    "_string": "at the “DCS” there are (NO TEAMS) or (ONE-ON-ONE)",
+    "_N$string": "at the “DCS” there are (NO TEAMS) or (ONE-ON-ONE)",
     "_fontSize": 38,
     "_lineHeight": 60,
     "_enableWrapText": true,
@@ -17349,7 +17352,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "77k5rvHWdBeqbNNa+IbdHL"
+    "_id": "90xgN9rAtGOpbz0+RGML2D"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -17359,7 +17362,7 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 354
@@ -17412,7 +17415,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "1bvyCZSidPvpHp9SWzdBuY"
+    "_id": "c4lW//9UhKfZXbjngCRWg7"
   },
   {
     "__type__": "cc.Label",
@@ -17447,7 +17450,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "85hPxL1DVBZpPUfsD5XaZe"
+    "_id": "940gK9QE1Kf4zfhIqb9p7k"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -17457,7 +17460,7 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 356
@@ -17474,7 +17477,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1684.04,
+      "width": 1330,
       "height": 75.6
     },
     "_anchorPoint": {
@@ -17510,7 +17513,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "81OvwkgFpBrbKHMXjwVPq+"
+    "_id": "e5/E9IpMBDNYWrJLccgbFQ"
   },
   {
     "__type__": "cc.Label",
@@ -17527,8 +17530,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "  = To begin each Game. All Players MUST score (10) Ten Points to Initiate-Scoring-  ",
-    "_N$string": "  = To begin each Game. All Players MUST score (10) Ten Points to Initiate-Scoring-  ",
+    "_string": "  = To begin each Game. All Players MUST score (10) Ten Points to ",
+    "_N$string": "  = To begin each Game. All Players MUST score (10) Ten Points to ",
     "_fontSize": 38,
     "_lineHeight": 60,
     "_enableWrapText": true,
@@ -17545,7 +17548,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "30BK45h1dLza2AUd2msizA"
+    "_id": "21lB/0H8tKIYtQ/KiDEHaG"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -17555,7 +17558,7 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 358
@@ -17572,7 +17575,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1659.66,
+      "width": 1821.63,
       "height": 75.6
     },
     "_anchorPoint": {
@@ -17608,7 +17611,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "5cw3eqoV5Cr5e30OepVGOd"
+    "_id": "212APJCBBGc4VMCGTJHUoY"
   },
   {
     "__type__": "cc.Label",
@@ -17625,8 +17628,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "Houses. Then scoring WILL be in multiples of (5s) Fives (Ex. - 5, 10, 15, 20, 25, etc…) ",
-    "_N$string": "Houses. Then scoring WILL be in multiples of (5s) Fives (Ex. - 5, 10, 15, 20, 25, etc…) ",
+    "_string": "Initiate-Scoring-  Houses. Then scoring WILL be in multiples of (5s) Fives (Ex. - 5, 10, 15, 20, ",
+    "_N$string": "Initiate-Scoring-  Houses. Then scoring WILL be in multiples of (5s) Fives (Ex. - 5, 10, 15, 20, ",
     "_fontSize": 38,
     "_lineHeight": 60,
     "_enableWrapText": true,
@@ -17643,7 +17646,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "3bP9X9cZZHw4n72FkMPgjb"
+    "_id": "cdlDUy+jhFjZKSuQ+EvLZ/"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -17653,7 +17656,7 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 360
@@ -17663,14 +17666,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
+      "r": 0,
       "g": 0,
       "b": 0,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 463.11,
+      "width": 192.08,
       "height": 75.6
     },
     "_anchorPoint": {
@@ -17706,7 +17709,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "16CxqRpaNEOp/q0lpSXxkG"
+    "_id": "f9sPlA329KFISDVc36DHqr"
   },
   {
     "__type__": "cc.Label",
@@ -17714,6 +17717,104 @@
     "_objFlags": 0,
     "node": {
       "__id__": 359
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_string": "25, etc…) ",
+    "_N$string": "25, etc…) ",
+    "_fontSize": 38,
+    "_lineHeight": 60,
+    "_enableWrapText": true,
+    "_N$file": {
+      "__uuid__": "83c55ed5-04a1-49d3-b248-77bda85e51d0"
+    },
+    "_isSystemFontUsed": false,
+    "_spacingX": 0,
+    "_batchAsBitmap": false,
+    "_styleFlags": 0,
+    "_underlineHeight": 0,
+    "_N$horizontalAlign": 0,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 0,
+    "_N$cacheMode": 0,
+    "_id": "57JYnOGL1BS4BsIkkSL/Uc"
+  },
+  {
+    "__type__": "cc.PrivateNode",
+    "_name": "RICHTEXT_CHILD",
+    "_objFlags": 1024,
+    "_parent": {
+      "__id__": 334
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 362
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 463.11,
+      "height": 75.6
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        -555.6000000000001,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "showInEditor": false,
+    "_id": "dfdDcN8/VNkYNNhtkE6x7X"
+  },
+  {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 361
     },
     "_enabled": true,
     "_materials": [
@@ -17741,7 +17842,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "92/kLWD3lCPqbCdtJzSA30"
+    "_id": "4eUo4GReBJupkV3Pvbpx51"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -17751,10 +17852,10 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
-        "__id__": 362
+        "__id__": 364
       }
     ],
     "_prefab": null,
@@ -17781,7 +17882,7 @@
       "ctor": "Float64Array",
       "array": [
         463.11,
-        -495.60000000000014,
+        -555.6000000000001,
         0,
         0,
         0,
@@ -17804,14 +17905,14 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "95FHDsPhdHl5GcG3CT0YE+"
+    "_id": "d5HM4bEANLWZhhOIFDdCfd"
   },
   {
     "__type__": "cc.Label",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 361
+      "__id__": 363
     },
     "_enabled": true,
     "_materials": [
@@ -17839,7 +17940,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "11rZuiwalIVaXImDpMvC0v"
+    "_id": "43MZWLBPNIOLyKxJvOsjaa"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -17849,10 +17950,10 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
-        "__id__": 364
+        "__id__": 366
       }
     ],
     "_prefab": null,
@@ -17879,7 +17980,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        -555.6000000000001,
+        -615.6000000000001,
         0,
         0,
         0,
@@ -17902,14 +18003,14 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "eevNYp1tVFn4CqH/57PmSg"
+    "_id": "302Mtz2fdBh7gSe58/Semo"
   },
   {
     "__type__": "cc.Label",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 363
+      "__id__": 365
     },
     "_enabled": true,
     "_materials": [
@@ -17937,7 +18038,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "4aEUa9aC5H2JoO+4KTRsc5"
+    "_id": "c8VG7SAjVEnauC1R9ec6MB"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -17947,10 +18048,10 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
-        "__id__": 366
+        "__id__": 368
       }
     ],
     "_prefab": null,
@@ -17977,7 +18078,7 @@
       "ctor": "Float64Array",
       "array": [
         352.93000000000006,
-        -555.6000000000001,
+        -615.6000000000001,
         0,
         0,
         0,
@@ -18000,14 +18101,14 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "60LvaTVsdL4oi1yb/APOT6"
+    "_id": "a8f15g+dFNBqp6sVzOcywt"
   },
   {
     "__type__": "cc.Label",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 365
+      "__id__": 367
     },
     "_enabled": true,
     "_materials": [
@@ -18035,7 +18136,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "f07JzoTARBz6sN1n+0XXay"
+    "_id": "6caI2gT+1E1agOI4Ad63Ho"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -18045,10 +18146,10 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
-        "__id__": 368
+        "__id__": 370
       }
     ],
     "_prefab": null,
@@ -18075,7 +18176,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        -615.6000000000001,
+        -675.6000000000001,
         0,
         0,
         0,
@@ -18098,14 +18199,14 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "b07ery6a5P3KNt1GxOuaFp"
+    "_id": "4cfMn3wiRBb59tk/N+OFUV"
   },
   {
     "__type__": "cc.Label",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 367
+      "__id__": 369
     },
     "_enabled": true,
     "_materials": [
@@ -18133,7 +18234,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "5fEsJFGgRDJKdIQ+7Bj4Up"
+    "_id": "41qG+0RvBB14ZLTFkdGPN7"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -18143,10 +18244,10 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
-        "__id__": 370
+        "__id__": 372
       }
     ],
     "_prefab": null,
@@ -18172,8 +18273,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        426.46000000000004,
-        -615.6000000000001,
+        426.46,
+        -675.6000000000001,
         0,
         0,
         0,
@@ -18196,14 +18297,14 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "a6bpyiBaNF3bL7YXE9G3Ym"
+    "_id": "5dYtqQ8OBKEIbAZH0EW+In"
   },
   {
     "__type__": "cc.Label",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 369
+      "__id__": 371
     },
     "_enabled": true,
     "_materials": [
@@ -18231,7 +18332,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "afhZd0PzBAFLODcffP5lDt"
+    "_id": "87j4SBW79FDbWzQ0QAeSGo"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -18241,10 +18342,10 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
-        "__id__": 372
+        "__id__": 374
       }
     ],
     "_prefab": null,
@@ -18271,7 +18372,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        -675.6000000000001,
+        -735.6000000000001,
         0,
         0,
         0,
@@ -18294,14 +18395,14 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "4dyZKnZC9KAYstPon571ro"
+    "_id": "ccq5yeXTJBD5ri3iuubRuV"
   },
   {
     "__type__": "cc.Label",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 371
+      "__id__": 373
     },
     "_enabled": true,
     "_materials": [
@@ -18329,7 +18430,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "7crqtf6JVIn5UAUF521Iw1"
+    "_id": "46dNFKzHlIKpyzXxxd1Xsw"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -18339,10 +18440,10 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
-        "__id__": 374
+        "__id__": 376
       }
     ],
     "_prefab": null,
@@ -18369,7 +18470,7 @@
       "ctor": "Float64Array",
       "array": [
         630.23,
-        -675.6000000000001,
+        -735.6000000000001,
         0,
         0,
         0,
@@ -18392,14 +18493,14 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "a1CTSXCBhEIZWYWe0ed7mH"
+    "_id": "c53Yd14YZIWrfcFmfre7vM"
   },
   {
     "__type__": "cc.Label",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 373
+      "__id__": 375
     },
     "_enabled": true,
     "_materials": [
@@ -18427,7 +18528,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "afyLYS07hM3LFwspdSUiof"
+    "_id": "d6g0pWux1HIpFiR53G7MjD"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -18437,10 +18538,10 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
-        "__id__": 376
+        "__id__": 378
       }
     ],
     "_prefab": null,
@@ -18455,202 +18556,6 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 322.18,
-      "height": 75.6
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_trs": {
-      "__type__": "TypedArray",
-      "ctor": "Float64Array",
-      "array": [
-        0,
-        -735.6000000000001,
-        0,
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        1
-      ]
-    },
-    "_eulerAngles": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_is3DNode": false,
-    "_groupIndex": 0,
-    "groupIndex": 0,
-    "showInEditor": false,
-    "_id": "6aT7F/pzVDe7PNYIiyttMW"
-  },
-  {
-    "__type__": "cc.Label",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 375
-    },
-    "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
-      }
-    ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_string": "A BLOCK GAME",
-    "_N$string": "A BLOCK GAME",
-    "_fontSize": 38,
-    "_lineHeight": 60,
-    "_enableWrapText": true,
-    "_N$file": {
-      "__uuid__": "83c55ed5-04a1-49d3-b248-77bda85e51d0"
-    },
-    "_isSystemFontUsed": false,
-    "_spacingX": 0,
-    "_batchAsBitmap": false,
-    "_styleFlags": 0,
-    "_underlineHeight": 0,
-    "_N$horizontalAlign": 0,
-    "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
-    "_N$overflow": 0,
-    "_N$cacheMode": 0,
-    "_id": "2d7o8f+KRAjocAXPlbYFvf"
-  },
-  {
-    "__type__": "cc.PrivateNode",
-    "_name": "RICHTEXT_CHILD",
-    "_objFlags": 1024,
-    "_parent": {
-      "__id__": 334
-    },
-    "_children": [],
-    "_active": false,
-    "_components": [
-      {
-        "__id__": 378
-      }
-    ],
-    "_prefab": null,
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 1538.65,
-      "height": 75.6
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_trs": {
-      "__type__": "TypedArray",
-      "ctor": "Float64Array",
-      "array": [
-        322.18000000000006,
-        -735.6000000000001,
-        0,
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        1
-      ]
-    },
-    "_eulerAngles": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_is3DNode": false,
-    "_groupIndex": 0,
-    "groupIndex": 0,
-    "showInEditor": false,
-    "_id": "92/WuMlUdHJoIdh9RWnfd+"
-  },
-  {
-    "__type__": "cc.Label",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 377
-    },
-    "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
-      }
-    ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_string": "  = Results only after no Player can play a Domino due to all numbers in one   ",
-    "_N$string": "  = Results only after no Player can play a Domino due to all numbers in one   ",
-    "_fontSize": 38,
-    "_lineHeight": 60,
-    "_enableWrapText": true,
-    "_N$file": {
-      "__uuid__": "83c55ed5-04a1-49d3-b248-77bda85e51d0"
-    },
-    "_isSystemFontUsed": false,
-    "_spacingX": 0,
-    "_batchAsBitmap": false,
-    "_styleFlags": 0,
-    "_underlineHeight": 0,
-    "_N$horizontalAlign": 0,
-    "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
-    "_N$overflow": 0,
-    "_N$cacheMode": 0,
-    "_id": "9czP4YgCxGwIKqdqA7RRGl"
-  },
-  {
-    "__type__": "cc.PrivateNode",
-    "_name": "RICHTEXT_CHILD",
-    "_objFlags": 1024,
-    "_parent": {
-      "__id__": 334
-    },
-    "_children": [],
-    "_active": false,
-    "_components": [
-      {
-        "__id__": 380
-      }
-    ],
-    "_prefab": null,
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 1893.71,
       "height": 75.6
     },
     "_anchorPoint": {
@@ -18686,14 +18591,14 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "12zjXri0FJbbyW8mX6peSZ"
+    "_id": "66+iLEdKVE+rr4j4LoI7VG"
   },
   {
     "__type__": "cc.Label",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 379
+      "__id__": 377
     },
     "_enabled": true,
     "_materials": [
@@ -18703,8 +18608,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "suit is played and no Player can play on the end Domino. The Player with the Lowest number of",
-    "_N$string": "suit is played and no Player can play on the end Domino. The Player with the Lowest number of",
+    "_string": "A BLOCK GAME",
+    "_N$string": "A BLOCK GAME",
     "_fontSize": 38,
     "_lineHeight": 60,
     "_enableWrapText": true,
@@ -18721,7 +18626,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "645Bx+CoRDy7iONn8n8ugs"
+    "_id": "69g9uVqydDjppOHxaVw3wI"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -18731,7 +18636,105 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 380
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 1517.87,
+      "height": 75.6
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        322.18000000000006,
+        -795.6000000000001,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "showInEditor": false,
+    "_id": "6esreCuV5Ntb9XtXulmtUj"
+  },
+  {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 379
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_string": "  = Results only after no Player can play a Domino due to all numbers in one ",
+    "_N$string": "  = Results only after no Player can play a Domino due to all numbers in one ",
+    "_fontSize": 38,
+    "_lineHeight": 60,
+    "_enableWrapText": true,
+    "_N$file": {
+      "__uuid__": "83c55ed5-04a1-49d3-b248-77bda85e51d0"
+    },
+    "_isSystemFontUsed": false,
+    "_spacingX": 0,
+    "_batchAsBitmap": false,
+    "_styleFlags": 0,
+    "_underlineHeight": 0,
+    "_N$horizontalAlign": 0,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 0,
+    "_N$cacheMode": 0,
+    "_id": "afULYq0k1GQ5W6kgzilKK8"
+  },
+  {
+    "__type__": "cc.PrivateNode",
+    "_name": "RICHTEXT_CHILD",
+    "_objFlags": 1024,
+    "_parent": {
+      "__id__": 334
+    },
+    "_children": [],
+    "_active": true,
     "_components": [
       {
         "__id__": 382
@@ -18748,7 +18751,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1849.38,
+      "width": 1706.16,
       "height": 75.6
     },
     "_anchorPoint": {
@@ -18784,7 +18787,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "f9MlBM5yhE0LYQO+OxLHBp"
+    "_id": "5fdPfo4WNCoopmYnknCg6w"
   },
   {
     "__type__": "cc.Label",
@@ -18801,8 +18804,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "Pips on the Domino in hand WILL get all Points in the Opponent’s hand. In the case of a tie,   ",
-    "_N$string": "Pips on the Domino in hand WILL get all Points in the Opponent’s hand. In the case of a tie,   ",
+    "_string": "  suit is played and no Player can play on the end Domino. The Player with the Lowest ",
+    "_N$string": "  suit is played and no Player can play on the end Domino. The Player with the Lowest ",
     "_fontSize": 38,
     "_lineHeight": 60,
     "_enableWrapText": true,
@@ -18819,7 +18822,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "b3GWjeqc9BrJEWYmgjOoDX"
+    "_id": "d3C1JOLj9LBoKd6n6TmTsK"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -18829,7 +18832,7 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 384
@@ -18846,7 +18849,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 515.67,
+      "width": 1789.19,
       "height": 75.6
     },
     "_anchorPoint": {
@@ -18882,7 +18885,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "88H8tnLydHzIrtH5yySlzx"
+    "_id": "f9yVZTJxtKOo3XeqV6d4f2"
   },
   {
     "__type__": "cc.Label",
@@ -18899,8 +18902,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "no Player gets any Points ",
-    "_N$string": "no Player gets any Points ",
+    "_string": "number of Pips on the Domino in hand WILL get all Points in the Opponent’s hand. In the ",
+    "_N$string": "number of Pips on the Domino in hand WILL get all Points in the Opponent’s hand. In the ",
     "_fontSize": 38,
     "_lineHeight": 60,
     "_enableWrapText": true,
@@ -18917,7 +18920,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "07rlCXpsJDyaHhVuby/6KZ"
+    "_id": "d1T3/Gxv1AxYNz2isfHcvw"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -18927,7 +18930,7 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 386
@@ -18937,14 +18940,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
+      "r": 0,
       "g": 0,
       "b": 0,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 586.96,
+      "width": 794.59,
       "height": 75.6
     },
     "_anchorPoint": {
@@ -18980,7 +18983,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "f2siwoLItCZ6RryKqgXbel"
+    "_id": "b9mDQ5qTJN04BGblE3nPS8"
   },
   {
     "__type__": "cc.Label",
@@ -18997,8 +19000,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "AT THE END OF EACH HAND",
-    "_N$string": "AT THE END OF EACH HAND",
+    "_string": "case of a tie,   no Player gets any Points ",
+    "_N$string": "case of a tie,   no Player gets any Points ",
     "_fontSize": 38,
     "_lineHeight": 60,
     "_enableWrapText": true,
@@ -19015,7 +19018,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "8a6zwUi/9FyqM0WpyyTHvi"
+    "_id": "45zPPwqSRD3IiCXgiy8613"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -19025,7 +19028,7 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 388
@@ -19035,112 +19038,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 0,
+      "r": 255,
       "g": 0,
       "b": 0,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1268.57,
-      "height": 75.6
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_trs": {
-      "__type__": "TypedArray",
-      "ctor": "Float64Array",
-      "array": [
-        586.96,
-        -975.6000000000001,
-        0,
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        1
-      ]
-    },
-    "_eulerAngles": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_is3DNode": false,
-    "_groupIndex": 0,
-    "groupIndex": 0,
-    "showInEditor": false,
-    "_id": "21ndaNdfpPU6batY9AmXST"
-  },
-  {
-    "__type__": "cc.Label",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 387
-    },
-    "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
-      }
-    ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_string": "  = All Domino Tiles WILL be turned face up to be viewed by all  ",
-    "_N$string": "  = All Domino Tiles WILL be turned face up to be viewed by all  ",
-    "_fontSize": 38,
-    "_lineHeight": 60,
-    "_enableWrapText": true,
-    "_N$file": {
-      "__uuid__": "83c55ed5-04a1-49d3-b248-77bda85e51d0"
-    },
-    "_isSystemFontUsed": false,
-    "_spacingX": 0,
-    "_batchAsBitmap": false,
-    "_styleFlags": 0,
-    "_underlineHeight": 0,
-    "_N$horizontalAlign": 0,
-    "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
-    "_N$overflow": 0,
-    "_N$cacheMode": 0,
-    "_id": "8cEQBe2E5LLZThcnjz7LMv"
-  },
-  {
-    "__type__": "cc.PrivateNode",
-    "_name": "RICHTEXT_CHILD",
-    "_objFlags": 1024,
-    "_parent": {
-      "__id__": 334
-    },
-    "_children": [],
-    "_active": false,
-    "_components": [
-      {
-        "__id__": 390
-      }
-    ],
-    "_prefab": null,
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 1802.42,
+      "width": 586.96,
       "height": 75.6
     },
     "_anchorPoint": {
@@ -19176,14 +19081,14 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "49r+GaGIdPErYp4DnGvlbc"
+    "_id": "a2NR+JPulI17zHkZDVZhn7"
   },
   {
     "__type__": "cc.Label",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 389
+      "__id__": 387
     },
     "_enabled": true,
     "_materials": [
@@ -19193,8 +19098,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "Players. The Dominoes WILL be counted and rounded to the nearest Five. The Player that  ",
-    "_N$string": "Players. The Dominoes WILL be counted and rounded to the nearest Five. The Player that  ",
+    "_string": "AT THE END OF EACH HAND",
+    "_N$string": "AT THE END OF EACH HAND",
     "_fontSize": 38,
     "_lineHeight": 60,
     "_enableWrapText": true,
@@ -19211,7 +19116,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "e2kKwGipFA9azJb3Ca4ujx"
+    "_id": "e27AZqMCZB8p/9pxzZrz+X"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -19221,7 +19126,105 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 390
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 1258.17,
+      "height": 75.6
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        586.96,
+        -1035.6000000000001,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "showInEditor": false,
+    "_id": "92kdt1tEpHLKngo8xK5vdq"
+  },
+  {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 389
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_string": "  = All Domino Tiles WILL be turned face up to be viewed by all ",
+    "_N$string": "  = All Domino Tiles WILL be turned face up to be viewed by all ",
+    "_fontSize": 38,
+    "_lineHeight": 60,
+    "_enableWrapText": true,
+    "_N$file": {
+      "__uuid__": "83c55ed5-04a1-49d3-b248-77bda85e51d0"
+    },
+    "_isSystemFontUsed": false,
+    "_spacingX": 0,
+    "_batchAsBitmap": false,
+    "_styleFlags": 0,
+    "_underlineHeight": 0,
+    "_N$horizontalAlign": 0,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 0,
+    "_N$cacheMode": 0,
+    "_id": "f7rtZNXNZNQqdGc5BgxPg8"
+  },
+  {
+    "__type__": "cc.PrivateNode",
+    "_name": "RICHTEXT_CHILD",
+    "_objFlags": 1024,
+    "_parent": {
+      "__id__": 334
+    },
+    "_children": [],
+    "_active": true,
     "_components": [
       {
         "__id__": 392
@@ -19238,7 +19241,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 671.09,
+      "width": 1812.81,
       "height": 75.6
     },
     "_anchorPoint": {
@@ -19274,7 +19277,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "f5d9Oj+T9PeK3ha8cXOLYI"
+    "_id": "17U9fpvgVLTY+CR8CDTc3m"
   },
   {
     "__type__": "cc.Label",
@@ -19282,6 +19285,104 @@
     "_objFlags": 0,
     "node": {
       "__id__": 391
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_string": " Players. The Dominoes WILL be counted and rounded to the nearest Five. The Player that  ",
+    "_N$string": " Players. The Dominoes WILL be counted and rounded to the nearest Five. The Player that  ",
+    "_fontSize": 38,
+    "_lineHeight": 60,
+    "_enableWrapText": true,
+    "_N$file": {
+      "__uuid__": "83c55ed5-04a1-49d3-b248-77bda85e51d0"
+    },
+    "_isSystemFontUsed": false,
+    "_spacingX": 0,
+    "_batchAsBitmap": false,
+    "_styleFlags": 0,
+    "_underlineHeight": 0,
+    "_N$horizontalAlign": 0,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 0,
+    "_N$cacheMode": 0,
+    "_id": "07c6EEQa5Gu6AHZZtCg9nY"
+  },
+  {
+    "__type__": "cc.PrivateNode",
+    "_name": "RICHTEXT_CHILD",
+    "_objFlags": 1024,
+    "_parent": {
+      "__id__": 334
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 394
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 671.09,
+      "height": 75.6
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        -1155.6000000000001,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "showInEditor": false,
+    "_id": "ce7x4cR/dMQ6hCWsF8NjLY"
+  },
+  {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 393
     },
     "_enabled": true,
     "_materials": [
@@ -19309,7 +19410,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "c09h5PlWVHWY0fPkwkDv+d"
+    "_id": "48AADOC3NHOoVYVyNule+H"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -19319,10 +19420,10 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
-        "__id__": 394
+        "__id__": 396
       }
     ],
     "_prefab": null,
@@ -19337,202 +19438,6 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 410.71,
-      "height": 75.6
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_trs": {
-      "__type__": "TypedArray",
-      "ctor": "Float64Array",
-      "array": [
-        0,
-        -1155.6000000000001,
-        0,
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        1
-      ]
-    },
-    "_eulerAngles": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_is3DNode": false,
-    "_groupIndex": 0,
-    "groupIndex": 0,
-    "showInEditor": false,
-    "_id": "b2IitN151Im6YeKSAK8yAT"
-  },
-  {
-    "__type__": "cc.Label",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 393
-    },
-    "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
-      }
-    ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_string": "SECOND PLACE TIE",
-    "_N$string": "SECOND PLACE TIE",
-    "_fontSize": 38,
-    "_lineHeight": 60,
-    "_enableWrapText": true,
-    "_N$file": {
-      "__uuid__": "83c55ed5-04a1-49d3-b248-77bda85e51d0"
-    },
-    "_isSystemFontUsed": false,
-    "_spacingX": 0,
-    "_batchAsBitmap": false,
-    "_styleFlags": 0,
-    "_underlineHeight": 0,
-    "_N$horizontalAlign": 0,
-    "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
-    "_N$overflow": 0,
-    "_N$cacheMode": 0,
-    "_id": "68Q5ZVWndLu4dARj8br6JA"
-  },
-  {
-    "__type__": "cc.PrivateNode",
-    "_name": "RICHTEXT_CHILD",
-    "_objFlags": 1024,
-    "_parent": {
-      "__id__": 334
-    },
-    "_children": [],
-    "_active": false,
-    "_components": [
-      {
-        "__id__": 396
-      }
-    ],
-    "_prefab": null,
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 1471.76,
-      "height": 75.6
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_trs": {
-      "__type__": "TypedArray",
-      "ctor": "Float64Array",
-      "array": [
-        410.71000000000004,
-        -1155.6000000000001,
-        0,
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        1
-      ]
-    },
-    "_eulerAngles": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_is3DNode": false,
-    "_groupIndex": 0,
-    "groupIndex": 0,
-    "showInEditor": false,
-    "_id": "83udqnNcxP1YokcIa+Vlua"
-  },
-  {
-    "__type__": "cc.Label",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 395
-    },
-    "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
-      }
-    ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_string": "  = All Dominoes WILL be shuffled. The Player that picks the Double Five  ",
-    "_N$string": "  = All Dominoes WILL be shuffled. The Player that picks the Double Five  ",
-    "_fontSize": 38,
-    "_lineHeight": 60,
-    "_enableWrapText": true,
-    "_N$file": {
-      "__uuid__": "83c55ed5-04a1-49d3-b248-77bda85e51d0"
-    },
-    "_isSystemFontUsed": false,
-    "_spacingX": 0,
-    "_batchAsBitmap": false,
-    "_styleFlags": 0,
-    "_underlineHeight": 0,
-    "_N$horizontalAlign": 0,
-    "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
-    "_N$overflow": 0,
-    "_N$cacheMode": 0,
-    "_id": "4axuOhYwZGiJyT6MhrI5xR"
-  },
-  {
-    "__type__": "cc.PrivateNode",
-    "_name": "RICHTEXT_CHILD",
-    "_objFlags": 1024,
-    "_parent": {
-      "__id__": 334
-    },
-    "_children": [],
-    "_active": false,
-    "_components": [
-      {
-        "__id__": 398
-      }
-    ],
-    "_prefab": null,
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 646.95,
       "height": 75.6
     },
     "_anchorPoint": {
@@ -19568,7 +19473,105 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "e5CXYKSHlLUovIkG/6hbAp"
+    "_id": "29lc9400hJVZi2WXYoc1ie"
+  },
+  {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 395
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_string": "SECOND PLACE TIE",
+    "_N$string": "SECOND PLACE TIE",
+    "_fontSize": 38,
+    "_lineHeight": 60,
+    "_enableWrapText": true,
+    "_N$file": {
+      "__uuid__": "83c55ed5-04a1-49d3-b248-77bda85e51d0"
+    },
+    "_isSystemFontUsed": false,
+    "_spacingX": 0,
+    "_batchAsBitmap": false,
+    "_styleFlags": 0,
+    "_underlineHeight": 0,
+    "_N$horizontalAlign": 0,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 0,
+    "_N$cacheMode": 0,
+    "_id": "a6R0ecGDVALLNk7ZfxVB+k"
+  },
+  {
+    "__type__": "cc.PrivateNode",
+    "_name": "RICHTEXT_CHILD",
+    "_objFlags": 1024,
+    "_parent": {
+      "__id__": 334
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 398
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 1364.7,
+      "height": 75.6
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        410.71000000000004,
+        -1215.6000000000001,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "showInEditor": false,
+    "_id": "012UuaPQ5PLp8V1XV7+Prp"
   },
   {
     "__type__": "cc.Label",
@@ -19585,8 +19588,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "WILL move on to the next round ",
-    "_N$string": "WILL move on to the next round ",
+    "_string": "  = All Dominoes WILL be shuffled. The Player that picks the Double ",
+    "_N$string": "  = All Dominoes WILL be shuffled. The Player that picks the Double ",
     "_fontSize": 38,
     "_lineHeight": 60,
     "_enableWrapText": true,
@@ -19603,7 +19606,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "92+Gae7a9B4YnSBFleiJUF"
+    "_id": "5bO7XRdflPhaFuayLi+rYj"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -19613,7 +19616,7 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 400
@@ -19623,14 +19626,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
+      "r": 0,
       "g": 0,
       "b": 0,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 713.11,
+      "width": 754.01,
       "height": 75.6
     },
     "_anchorPoint": {
@@ -19666,7 +19669,7 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "faQheY7q9KU7/aw8ifc1qk"
+    "_id": "achm+TOSxBFJT7O0a4erZh"
   },
   {
     "__type__": "cc.Label",
@@ -19683,8 +19686,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "PLAYING WITHOUT MEMBERSHIP",
-    "_N$string": "PLAYING WITHOUT MEMBERSHIP",
+    "_string": "Five  WILL move on to the next round ",
+    "_N$string": "Five  WILL move on to the next round ",
     "_fontSize": 38,
     "_lineHeight": 60,
     "_enableWrapText": true,
@@ -19701,7 +19704,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "c8ScHQHrRL86XdXWx+xCgb"
+    "_id": "faGh49inZHaJnmf7iPSk4U"
   },
   {
     "__type__": "cc.PrivateNode",
@@ -19711,7 +19714,7 @@
       "__id__": 334
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 402
@@ -19721,112 +19724,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 0,
+      "r": 255,
       "g": 0,
       "b": 0,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1184.85,
-      "height": 75.6
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_trs": {
-      "__type__": "TypedArray",
-      "ctor": "Float64Array",
-      "array": [
-        713.11,
-        -1275.6000000000001,
-        0,
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        1
-      ]
-    },
-    "_eulerAngles": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_is3DNode": false,
-    "_groupIndex": 0,
-    "groupIndex": 0,
-    "showInEditor": false,
-    "_id": "22f37/ZDNDn6bHZ93kpSsR"
-  },
-  {
-    "__type__": "cc.Label",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 401
-    },
-    "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
-      }
-    ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_string": "  = If caught using another Player’s Membership, you WILL",
-    "_N$string": "  = If caught using another Player’s Membership, you WILL",
-    "_fontSize": 38,
-    "_lineHeight": 60,
-    "_enableWrapText": true,
-    "_N$file": {
-      "__uuid__": "83c55ed5-04a1-49d3-b248-77bda85e51d0"
-    },
-    "_isSystemFontUsed": false,
-    "_spacingX": 0,
-    "_batchAsBitmap": false,
-    "_styleFlags": 0,
-    "_underlineHeight": 0,
-    "_N$horizontalAlign": 0,
-    "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
-    "_N$overflow": 0,
-    "_N$cacheMode": 0,
-    "_id": "8fu1CQTuZE2LHFt39U3QeO"
-  },
-  {
-    "__type__": "cc.PrivateNode",
-    "_name": "RICHTEXT_CHILD",
-    "_objFlags": 1024,
-    "_parent": {
-      "__id__": 334
-    },
-    "_children": [],
-    "_active": false,
-    "_components": [
-      {
-        "__id__": 404
-      }
-    ],
-    "_prefab": null,
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 993.08,
+      "width": 713.11,
       "height": 75.6
     },
     "_anchorPoint": {
@@ -19862,14 +19767,14 @@
     "_groupIndex": 0,
     "groupIndex": 0,
     "showInEditor": false,
-    "_id": "98iomfg5JAOqkPf64R0+Wt"
+    "_id": "b0PTQWkjtCl6B7gePDjaZl"
   },
   {
     "__type__": "cc.Label",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 403
+      "__id__": 401
     },
     "_enabled": true,
     "_materials": [
@@ -19879,8 +19784,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "  be DISQUALIFIED and FORFEIT all WINNINGS! ",
-    "_N$string": "  be DISQUALIFIED and FORFEIT all WINNINGS! ",
+    "_string": "PLAYING WITHOUT MEMBERSHIP",
+    "_N$string": "PLAYING WITHOUT MEMBERSHIP",
     "_fontSize": 38,
     "_lineHeight": 60,
     "_enableWrapText": true,
@@ -19897,7 +19802,203 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "44B+wwjedBj7bRyq2lgjVQ"
+    "_id": "b9gFLliy5JzLMMDMug8jvP"
+  },
+  {
+    "__type__": "cc.PrivateNode",
+    "_name": "RICHTEXT_CHILD",
+    "_objFlags": 1024,
+    "_parent": {
+      "__id__": 334
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 404
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 1077.53,
+      "height": 75.6
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        713.11,
+        -1335.6000000000001,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "showInEditor": false,
+    "_id": "dd8Dcog4FEY7W/Fog7LY0G"
+  },
+  {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 403
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_string": "  = If caught using another Player’s Membership, you ",
+    "_N$string": "  = If caught using another Player’s Membership, you ",
+    "_fontSize": 38,
+    "_lineHeight": 60,
+    "_enableWrapText": true,
+    "_N$file": {
+      "__uuid__": "83c55ed5-04a1-49d3-b248-77bda85e51d0"
+    },
+    "_isSystemFontUsed": false,
+    "_spacingX": 0,
+    "_batchAsBitmap": false,
+    "_styleFlags": 0,
+    "_underlineHeight": 0,
+    "_N$horizontalAlign": 0,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 0,
+    "_N$cacheMode": 0,
+    "_id": "58oJ1L2/JEZqdbS6AfAeza"
+  },
+  {
+    "__type__": "cc.PrivateNode",
+    "_name": "RICHTEXT_CHILD",
+    "_objFlags": 1024,
+    "_parent": {
+      "__id__": 334
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 406
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 1100.4,
+      "height": 75.6
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        -1395.6000000000001,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "showInEditor": false,
+    "_id": "e8YmK9a6dCdb8c4M4LXi2O"
+  },
+  {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 405
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_string": "WILL  be DISQUALIFIED and FORFEIT all WINNINGS! ",
+    "_N$string": "WILL  be DISQUALIFIED and FORFEIT all WINNINGS! ",
+    "_fontSize": 38,
+    "_lineHeight": 60,
+    "_enableWrapText": true,
+    "_N$file": {
+      "__uuid__": "83c55ed5-04a1-49d3-b248-77bda85e51d0"
+    },
+    "_isSystemFontUsed": false,
+    "_spacingX": 0,
+    "_batchAsBitmap": false,
+    "_styleFlags": 0,
+    "_underlineHeight": 0,
+    "_N$horizontalAlign": 0,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 0,
+    "_N$cacheMode": 0,
+    "_id": "5dlSPgeTBA97RwQrDjFiK3"
   },
   {
     "__type__": "cc.RichText",
@@ -19916,7 +20017,7 @@
       "__uuid__": "83c55ed5-04a1-49d3-b248-77bda85e51d0"
     },
     "_N$cacheMode": 0,
-    "_N$maxWidth": 1900,
+    "_N$maxWidth": 1850,
     "_N$lineHeight": 60,
     "_N$imageAtlas": null,
     "_N$handleTouchEvent": true,
@@ -19931,13 +20032,13 @@
     },
     "_children": [
       {
-        "__id__": 407
+        "__id__": 409
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 409
+        "__id__": 411
       }
     ],
     "_prefab": null,
@@ -19993,13 +20094,13 @@
     "_name": "Label",
     "_objFlags": 512,
     "_parent": {
-      "__id__": 406
+      "__id__": 408
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 408
+        "__id__": 410
       }
     ],
     "_prefab": null,
@@ -20055,7 +20156,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 407
+      "__id__": 409
     },
     "_enabled": true,
     "_materials": [
@@ -20090,7 +20191,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 406
+      "__id__": 408
     },
     "_enabled": true,
     "_normalMaterial": null,
@@ -20155,7 +20256,7 @@
       "__uuid__": "29158224-f8dd-4661-a796-1ffab537140e"
     },
     "_N$target": {
-      "__id__": 407
+      "__id__": 409
     },
     "_id": "ef7QnQ1EJKXIAo6xqR9kad"
   },
@@ -20257,10 +20358,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 414
+        "__id__": 416
       },
       {
-        "__id__": 415
+        "__id__": 417
       }
     ],
     "_prefab": null,
@@ -20316,7 +20417,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 413
+      "__id__": 415
     },
     "_enabled": true,
     "_materials": [
@@ -20348,7 +20449,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 413
+      "__id__": 415
     },
     "_enabled": true,
     "alignMode": 0,
@@ -20375,7 +20476,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 417
+      "__id__": 419
     },
     "_enabled": true,
     "_normalMaterial": null,
@@ -20440,7 +20541,7 @@
       "__uuid__": "29158224-f8dd-4661-a796-1ffab537140e"
     },
     "_N$target": {
-      "__id__": 439
+      "__id__": 441
     },
     "_id": "4391lvfcxFPJZh5q0yUj44"
   },
@@ -20449,17 +20550,17 @@
     "_name": "BackBtn",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 418
+      "__id__": 420
     },
     "_children": [
       {
-        "__id__": 439
+        "__id__": 441
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 416
+        "__id__": 418
       }
     ],
     "_prefab": null,
@@ -20515,26 +20616,26 @@
     "_name": "All",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 419
+      "__id__": 421
     },
     "_children": [
       {
-        "__id__": 420
-      },
-      {
         "__id__": 422
-      },
-      {
-        "__id__": 417
       },
       {
         "__id__": 424
       },
       {
+        "__id__": 419
+      },
+      {
         "__id__": 426
       },
       {
-        "__id__": 434
+        "__id__": 428
+      },
+      {
+        "__id__": 436
       }
     ],
     "_active": true,
@@ -20596,7 +20697,7 @@
     },
     "_children": [
       {
-        "__id__": 418
+        "__id__": 420
       }
     ],
     "_active": false,
@@ -20654,13 +20755,13 @@
     "_name": "bg",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 418
+      "__id__": 420
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 421
+        "__id__": 423
       }
     ],
     "_prefab": null,
@@ -20716,7 +20817,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 420
+      "__id__": 422
     },
     "_enabled": true,
     "_materials": [
@@ -20748,13 +20849,13 @@
     "_name": "logo",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 418
+      "__id__": 420
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 423
+        "__id__": 425
       }
     ],
     "_prefab": null,
@@ -20810,7 +20911,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 422
+      "__id__": 424
     },
     "_enabled": true,
     "_materials": [
@@ -20842,13 +20943,13 @@
     "_name": "label-AP1",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 418
+      "__id__": 420
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 425
+        "__id__": 427
       }
     ],
     "_prefab": null,
@@ -20904,7 +21005,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 424
+      "__id__": 426
     },
     "_enabled": true,
     "_materials": [
@@ -20939,23 +21040,23 @@
     "_name": "SoundBtn",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 418
+      "__id__": 420
     },
     "_children": [
-      {
-        "__id__": 427
-      },
       {
         "__id__": 429
       },
       {
         "__id__": 431
+      },
+      {
+        "__id__": 433
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 433
+        "__id__": 435
       }
     ],
     "_prefab": null,
@@ -21011,13 +21112,13 @@
     "_name": "Label",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 426
+      "__id__": 428
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 428
+        "__id__": 430
       }
     ],
     "_prefab": null,
@@ -21073,7 +21174,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 427
+      "__id__": 429
     },
     "_enabled": true,
     "_materials": [
@@ -21108,13 +21209,13 @@
     "_name": "sfx_on",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 426
+      "__id__": 428
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 430
+        "__id__": 432
       }
     ],
     "_prefab": null,
@@ -21170,7 +21271,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 429
+      "__id__": 431
     },
     "_enabled": true,
     "_materials": [
@@ -21202,13 +21303,13 @@
     "_name": "sfx_off",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 426
+      "__id__": 428
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 432
+        "__id__": 434
       }
     ],
     "_prefab": null,
@@ -21264,7 +21365,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 431
+      "__id__": 433
     },
     "_enabled": true,
     "_materials": [
@@ -21296,7 +21397,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 426
+      "__id__": 428
     },
     "_enabled": true,
     "_normalMaterial": null,
@@ -21368,17 +21469,17 @@
     "_name": "PPBtn",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 418
+      "__id__": 420
     },
     "_children": [
       {
-        "__id__": 435
+        "__id__": 437
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 438
+        "__id__": 440
       }
     ],
     "_prefab": null,
@@ -21434,16 +21535,16 @@
     "_name": "Background",
     "_objFlags": 512,
     "_parent": {
-      "__id__": 434
+      "__id__": 436
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 436
+        "__id__": 438
       },
       {
-        "__id__": 437
+        "__id__": 439
       }
     ],
     "_prefab": null,
@@ -21499,7 +21600,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 435
+      "__id__": 437
     },
     "_enabled": true,
     "_materials": [
@@ -21531,7 +21632,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 435
+      "__id__": 437
     },
     "_enabled": true,
     "alignMode": 0,
@@ -21558,7 +21659,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 434
+      "__id__": 436
     },
     "_enabled": true,
     "_normalMaterial": null,
@@ -21623,7 +21724,7 @@
       "__uuid__": "29158224-f8dd-4661-a796-1ffab537140e"
     },
     "_N$target": {
-      "__id__": 435
+      "__id__": 437
     },
     "_id": "94QwV4eutJjo1UPa5L38UD"
   },
@@ -21632,16 +21733,16 @@
     "_name": "Background",
     "_objFlags": 512,
     "_parent": {
-      "__id__": 417
+      "__id__": 419
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 440
+        "__id__": 442
       },
       {
-        "__id__": 441
+        "__id__": 443
       }
     ],
     "_prefab": null,
@@ -21697,7 +21798,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 439
+      "__id__": 441
     },
     "_enabled": true,
     "_materials": [
@@ -21729,7 +21830,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 439
+      "__id__": 441
     },
     "_enabled": true,
     "alignMode": 0,
