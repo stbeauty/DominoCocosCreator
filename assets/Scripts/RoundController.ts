@@ -13,6 +13,7 @@ import DomiTransform from "./DomiTransform";
 import GameAI from "./GameAI";
 import GameManager from "./GameManager";
 import Player from "./Player";
+import ResultController from "./ResultController";
 import { RoundState } from "./RoundState";
 import Tools from "./Tools";
 import User from "./User";
@@ -48,12 +49,23 @@ export default class RoundController extends cc.Component {
     @property(Player)
     Player: Player = null;
 
+    @property(cc.Node)
+    LoadingNode:cc.Node = null;
+
+    @property(ResultController)
+    ResultCtrl:ResultController = null;
+
     OtherPlayers:User[] = [];
     PlayingPlayers:User[] = [];
     
 
     @property(cc.Button)
     ManualStart:cc.Button = null;
+
+    @property(cc.Button)
+    FakeWin:cc.Button = null;
+    @property(cc.Button)
+    FakeLose:cc.Button = null;
 
     Net: PhotonClient = null;
 
@@ -69,6 +81,9 @@ export default class RoundController extends cc.Component {
 
     currentPlayer: number = 0;
     countDown: number = 0;
+
+    fakeLoading:number = 0;
+    fakeWintime:number = 0;
 
 
     onLoad() {
@@ -227,6 +242,26 @@ export default class RoundController extends cc.Component {
         }
 
         this.onEventSetup();
+
+        this.ResultCtrl.RoundCtrl = this;
+
+        this.FakeWin.node.on("click", () => {
+            this.fakeWintime++;
+            this.ResultCtrl.node.active = true;
+            if (this.fakeWintime <= 1)
+                this.ResultCtrl.showNormalWin();
+                else
+                this.ResultCtrl.showFinalWin();
+        })
+
+        
+        this.FakeLose.node.on("click", () => {
+            this.ResultCtrl.node.active = true;
+            this.ResultCtrl.showLose();
+        })
+
+        this.ResultCtrl.node.active = false;
+        this.startLoading();
         
     }
 
@@ -346,6 +381,12 @@ export default class RoundController extends cc.Component {
         }
     }
 
+    startLoading(){
+        this.ResultCtrl.node.active = false;
+        this.LoadingNode.active = true;
+        this.fakeLoading = 3;
+    }
+
 
     update(dt) {
         if (this.isHost){
@@ -356,6 +397,14 @@ export default class RoundController extends cc.Component {
                     this.countDown = 10;
                 }
             }
+        }
+
+        if (this.LoadingNode.active){
+            if (this.fakeLoading <= 0) {
+                this.LoadingNode.active = false;       
+            }
+            if (this.fakeLoading > 0)
+                this.fakeLoading -= dt;
         }
     }
 

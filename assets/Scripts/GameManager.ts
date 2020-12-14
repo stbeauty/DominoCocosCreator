@@ -10,6 +10,8 @@ export default class GameManager {
 
     static _instance: GameManager = null;
 
+    soundOn:boolean = true;
+
     static Instance(): GameManager {
         if (this._instance == null)
             this._instance = new GameManager();
