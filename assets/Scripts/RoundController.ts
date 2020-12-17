@@ -205,10 +205,10 @@ export default class RoundController extends cc.Component {
                 this.Net.raiseEvent(EventCode.DOMINO_PACK, pack2, { targetActors: [this.LeftPlayer.netActor.actorNr] });
             }
             if (this.TopPlayer.netActor) {
-                this.Net.raiseEvent(EventCode.DOMINO_PACK, pack2, { targetActors: [this.TopPlayer.netActor.actorNr] });
+                this.Net.raiseEvent(EventCode.DOMINO_PACK, pack3, { targetActors: [this.TopPlayer.netActor.actorNr] });
             }
             if (this.RightPlayer.netActor) {
-                this.Net.raiseEvent(EventCode.DOMINO_PACK, pack2, { targetActors: [this.RightPlayer.netActor.actorNr] });
+                this.Net.raiseEvent(EventCode.DOMINO_PACK, pack4, { targetActors: [this.RightPlayer.netActor.actorNr] });
             }
 
 
