@@ -5,6 +5,9 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
+import Domino from "./Domino";
+import HouseControl from "./Support/HouseControl";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -27,9 +30,17 @@ export default class User extends cc.Component {
     @property(cc.ProgressBar)
     UICountDown: cc.ProgressBar = null;
 
+    @property(HouseControl)
+    Houses: HouseControl = null;
+
+    @property([Domino])
+    HandDominoes: Domino[] = [];
+
     netActor: Photon.LoadBalancing.Actor = null;
 
     countdown:number = 0;
+
+    currentPoint:number = 0;
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {}
@@ -65,6 +76,11 @@ export default class User extends cc.Component {
         this.UIHouses.active = true;
 
 
+    }
+
+    stopCountDown(){
+        this.countdown = 0;
+        this.UICountDown.progress = 0;
     }
 
     startCountDown(cd:number){

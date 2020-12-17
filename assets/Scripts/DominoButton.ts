@@ -29,6 +29,8 @@ export default class DominoButton extends cc.Button {
     @property(cc.Sprite)
     BlankSprite: cc.Sprite;
 
+    isPlayed:boolean = false;
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
@@ -43,8 +45,11 @@ export default class DominoButton extends cc.Button {
 
     onTouchStart(touch, event){
         if (this.RoundControl.isPlayerTurn == false)
-        return;
-        this.RoundControl.PlayerDomino.setDomino(this.Domino.ID);
+            return;
+        if (this.isPlayed)
+            return;
+
+        this.RoundControl.PlayerDomino.setSprite(this.Domino.ID);
         this.RoundControl.PlayerDomino.startedPosition = Tools.WorldPos(this.node);
         this.RoundControl.PlayerDomino.rootBtn = this;
         this.RoundControl.onTouchStart(touch,event);
@@ -55,12 +60,16 @@ export default class DominoButton extends cc.Button {
     onTouchMove(touch, event){
         if (this.RoundControl.isPlayerTurn == false)
         return;
+        if (this.isPlayed)
+            return;
         this.RoundControl.onTouchMove(touch,event);
     }
 
     onTouchEnd(touch, event){
         if (this.RoundControl.isPlayerTurn == false)
         return;
+        if (this.isPlayed)
+            return;
         this.RoundControl.onTouchEnd(touch,event);
         this.BlackSprite.node.active = false;
     }
@@ -68,6 +77,8 @@ export default class DominoButton extends cc.Button {
     onTouchCancel(touch, event){
         if (this.RoundControl.isPlayerTurn == false)
         return;
+        if (this.isPlayed)
+            return;
         this.RoundControl.onTouchEnd(touch,event);
         this.BlackSprite.node.active = false;
     }
@@ -79,9 +90,16 @@ export default class DominoButton extends cc.Button {
     }
 
     setDomino(id:string){
-        this.Domino.setDomino(id);
+        this.Domino.setSprite(id);
         this.BlackSprite.node.active = false;
         this.BlankSprite.node.active = false;
+    }
+
+    testDraw(){
+        if (this.RoundControl.isTesting)
+        {
+            this.setDomino(this.RoundControl.drawDonimo());
+        }
     }
 
     // update (dt) {}

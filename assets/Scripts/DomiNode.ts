@@ -5,6 +5,7 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
+import AlignmentInfo from "./AlignmentInfo";
 import { Direction } from "./Direction";
 import Domino from "./Domino";
 import DominoDesk from "./DominoDesk";
@@ -12,61 +13,145 @@ import Tools from "./Tools";
 
 const {ccclass, property} = cc._decorator;
 
-export default class DomiNode {
 
-    Position: cc.Vec3 = cc.Vec3.ZERO;
-    TOP:boolean = true;
-    BOT:boolean = true;
-    LEFT:boolean = true;
-    RIGHT:boolean = true;
+export default class DomiNode extends cc.Node {
+
+    //Position: cc.Vec3 = cc.Vec3.ZERO;
+
     ID:string = "";
     RootDirection:Direction = Direction.LEFT;
     Desk: DominoDesk = null;
 
-    isRoot : boolean = false;
-    isDouble :boolean = false;
     isActive : boolean = true;
 
-    neighbors:DomiNode[] = [];
+    alignNode:AlignmentInfo[] = [];
 
-    CheckMatch(domi:Domino) : boolean{
-        var pos = Tools.WorldPos(domi.node);
-        if ((domi.ID[0] == this.ID || domi.ID[1] == this.ID) && cc.Vec3.distance(this.Position, pos) < 150)
-            if (this.TOP || this.BOT || this.LEFT || this.RIGHT){
-                return true;
-            }
-        return false;
-    }
+    static TOP(noside:boolean, tagID:boolean = false) : DomiNode{
+        var domi = new DomiNode;
+        domi.RootDirection = Direction.BOT;
 
-    Disable(){
-        if (this.isRoot == false){
-        this.TOP = false;
-        this.BOT = false;
-        this.LEFT = false;
-        this.RIGHT = false;
-        this.isActive = false;
-        } else {
-            this.neighbors.forEach(node => {
-                switch (node.RootDirection){
-                    case Direction.TOP:
-                        this.BOT = false;
-                        break;
-                        case Direction.BOT:
-                        this.TOP = false;
-                        break;
-                        case Direction.RIGHT:
-                        this.LEFT = false;
-                        break;
-                        case Direction.LEFT:
-                        this.RIGHT = false;
-                        break;
-                }
-            })
+        domi.alignNode.push(new AlignmentInfo(true, Direction.TOP, domi,tagID));
+        domi.alignNode.push(new AlignmentInfo(false, Direction.TOP, domi,tagID).convertForDouble());
+        if (noside == false){
+        domi.alignNode.push(new AlignmentInfo(false, Direction.LEFT, domi,tagID));
+        domi.alignNode.push(new AlignmentInfo(false, Direction.LEFT_TOP, domi,tagID));
+        
+        domi.alignNode.push(new AlignmentInfo(false, Direction.TOP_RIGHT, domi,tagID));
+        domi.alignNode.push(new AlignmentInfo(false, Direction.RIGHT, domi,tagID));
         }
+
+        return domi;
+    }
+    static BOT(noside:boolean,tagID:boolean = false) : DomiNode{
+        var domi = new DomiNode;
+        domi.RootDirection = Direction.TOP;
+        domi.alignNode.push(new AlignmentInfo(true, Direction.BOT, domi,tagID));
+        domi.alignNode.push(new AlignmentInfo(false, Direction.BOT, domi,tagID).convertForDouble());
+
+        if (noside == false){
+        domi.alignNode.push(new AlignmentInfo(false, Direction.RIGHT, domi,tagID));
+        domi.alignNode.push(new AlignmentInfo(false, Direction.RIGHT_BOT, domi,tagID));
+        
+        domi.alignNode.push(new AlignmentInfo(false, Direction.BOT_LEFT, domi,tagID));
+
+        domi.alignNode.push(new AlignmentInfo(false, Direction.LEFT, domi,tagID));
+        }
+
+        return domi;
+    }
+    static LEFT(noside:boolean,tagID:boolean = false) : DomiNode{
+        var domi = new DomiNode;
+        domi.RootDirection = Direction.RIGHT;
+
+        domi.alignNode.push(new AlignmentInfo(false, Direction.LEFT, domi,tagID));
+        domi.alignNode.push(new AlignmentInfo(true, Direction.LEFT, domi,tagID).convertForDouble());
+
+        if (noside == false){
+        domi.alignNode.push(new AlignmentInfo(true, Direction.BOT, domi,tagID));
+        domi.alignNode.push(new AlignmentInfo(true, Direction.BOT_LEFT, domi,tagID));
+        
+        domi.alignNode.push(new AlignmentInfo(true, Direction.LEFT_TOP, domi,tagID));
+
+        domi.alignNode.push(new AlignmentInfo(true, Direction.TOP, domi,tagID));
+        }
+        return domi;
+    }
+    static RIGHT(noside:boolean,tagID:boolean = false) : DomiNode{
+        var domi = new DomiNode;
+        domi.RootDirection = Direction.LEFT;
+
+        domi.alignNode.push(new AlignmentInfo(false, Direction.RIGHT, domi,tagID));
+        domi.alignNode.push(new AlignmentInfo(true, Direction.RIGHT, domi,tagID).convertForDouble());
+
+        if (noside == false){
+        domi.alignNode.push(new AlignmentInfo(true, Direction.TOP, domi,tagID));
+        domi.alignNode.push(new AlignmentInfo(true, Direction.TOP_RIGHT, domi,tagID));
+        
+        domi.alignNode.push(new AlignmentInfo(true, Direction.RIGHT_BOT, domi,tagID));
+
+        domi.alignNode.push(new AlignmentInfo(true, Direction.BOT, domi,tagID));
+        }
+        return domi;
+    }
+    static CENTER_LANSCAPE(tagID:boolean = false) : DomiNode{
+        var domi = new DomiNode;
+        domi.RootDirection = Direction.CENTER;
+        domi.alignNode.push(new AlignmentInfo(true, Direction.TOP, domi,tagID));
+        domi.alignNode.push(new AlignmentInfo(true, Direction.BOT, domi,tagID));
+        return domi;
     }
 
-    MakeFriends(node: DomiNode){
-        this.neighbors.push(node);
-        node.neighbors.push(this);
+    rotate(angle:number){
+        if (angle == 90){
+            switch (this.RootDirection){
+                case Direction.TOP:
+                    this.RootDirection = Direction.RIGHT;
+                    break;
+                    case Direction.RIGHT:
+                        this.RootDirection = Direction.BOT;
+                    break;
+                    case Direction.BOT:
+                        this.RootDirection = Direction.LEFT;
+                    break;
+                    case Direction.LEFT:
+                        this.RootDirection = Direction.TOP;
+                    break;
+            }
+
+        } else if (angle == -90){
+            switch (this.RootDirection){
+                case Direction.TOP:
+                    this.RootDirection = Direction.LEFT;
+                    break;
+                    case Direction.RIGHT:
+                        this.RootDirection = Direction.TOP;
+                    break;
+                    case Direction.BOT:
+                        this.RootDirection = Direction.RIGHT;
+                    break;
+                    case Direction.LEFT:
+                        this.RootDirection = Direction.BOT;
+                    break;
+            }
+        } else if (Math.abs(angle) == 180){
+            switch (this.RootDirection){
+                case Direction.TOP:
+                    this.RootDirection = Direction.BOT;
+                    break;
+                    case Direction.RIGHT:
+                        this.RootDirection = Direction.LEFT;
+                    break;
+                    case Direction.BOT:
+                        this.RootDirection = Direction.TOP;
+                    break;
+                    case Direction.LEFT:
+                        this.RootDirection = Direction.RIGHT;
+                    break;
+            }
+        }
+
+        this.alignNode.forEach( align => align.rotate(angle));
+
     }
+
 }

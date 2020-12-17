@@ -5,16 +5,11 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
-export enum Direction{
-    TOP,
-    TOP_RIGHT,
-    RIGHT,
-    RIGHT_BOT,
-    BOT,
-    BOT_LEFT,
-    LEFT,
-    LEFT_TOP,
-    CENTER,
 
-    
+export default class PlayInfo{
+
+   dominoID:string = "00";
+   alignID:number = -1;
+   points:number = 0;
+   houseID:number = -1;
 }

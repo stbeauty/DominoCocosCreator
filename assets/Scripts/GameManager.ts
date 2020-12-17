@@ -11,6 +11,7 @@ export default class GameManager {
     static _instance: GameManager = null;
 
     soundOn:boolean = true;
+    alignID: number = 0;
 
     static Instance(): GameManager {
         if (this._instance == null)
@@ -72,6 +73,10 @@ export default class GameManager {
     };
 
     JoinOrCreateRoom() {
+        // if (this.Net.myActor().name == "h")
+        // this.Net.createRoom("test");
+        // else
+        // this.Net.joinRoom("test");
 
         this.Net.joinRandomRoom();
 

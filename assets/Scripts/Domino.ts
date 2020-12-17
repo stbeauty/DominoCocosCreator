@@ -5,7 +5,11 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
+import AlignmentInfo from "./AlignmentInfo";
+import { Direction } from "./Direction";
 import DominoButton from "./DominoButton";
+import DomiNode from "./DomiNode";
+import Tools from "./Tools";
 
 const {ccclass, property} = cc._decorator;
 
@@ -25,14 +29,56 @@ export default class Domino extends cc.Component {
 
     rootBtn:DominoButton = null;
 
-    start () {
+    logicNode:DomiNode[] = [];
+    isRoot:boolean = false;
 
+    start () {
+        this.node.children.forEach(node=> node.active = false);
     }
 
+    static findAngle(ID: string, alignment: AlignmentInfo) {
+        var node: DomiNode = alignment.Root;
+        if (alignment.isPortrait) {
+            if (ID[0] == node.ID) {
+                if (Tools.WorldPos(alignment).y > Tools.WorldPos(node).y)
+                    return 90;
+                    else
+                    return -90;
+            } else {
+                if (Tools.WorldPos(alignment).y > Tools.WorldPos(node).y)
+                return -90;
+                else
+                return 90;
+            }
 
+        } else {
+            if (ID[0] == node.ID) {
+                if (Tools.WorldPos(alignment).x > Tools.WorldPos(node).x)
+                    return 0;
+                    else
+                    return 180;
+            } else {
+                if (Tools.WorldPos(alignment).x > Tools.WorldPos(node).x)
+                return 180;
+                else
+                return 0;
+            }
+        }
+    }
 
-    setDomino(id:string){
+    rotate(angle:number){
+        
+        this.node.angle = angle;
+        if (angle == 0)
+            return;
+
+            // This only work for first rotating ever
+        this.logicNode.forEach(node => node.rotate(angle));
+    }
+
+    setSprite(id:string){
         this.ID = id;
+        
         this.node.getComponentsInChildren(cc.Sprite).forEach(sprite => {
            if (sprite.spriteFrame.name == id) 
            sprite.node.active = true;
@@ -41,6 +87,50 @@ export default class Domino extends cc.Component {
         });
     }
 
+    setupDomino(id:string, isRoot:boolean){
+        this.setSprite(id);
+        this.isRoot = isRoot;
+        this.logicNode = [];
+
+        var isRootDouble: boolean = isRoot && id[0] == id[1];
+
+        if (isRoot || id[0] != id[1]){
+        var node = DomiNode.LEFT(isRootDouble, true);
+        node.parent = this.node;
+        node.x = -35;
+        node.ID = id[0];
+        this.logicNode.push(node);
+
+        node = DomiNode.RIGHT(isRootDouble, true);
+        node.parent = this.node;
+        node.x = 35;
+        node.ID = id[1];
+        this.logicNode.push(node);
+        }
+
+        if (id[0] == id[1]){
+            var node = DomiNode.CENTER_LANSCAPE(true);
+            node.parent = this.node;
+            node.ID = id[1];
+            this.logicNode.push(node);
+
+            if (isRoot == false){
+                var node: DomiNode = new DomiNode();
+                node.ID = id[0];
+                node.parent = this.node;
+                this.logicNode.push(node);
+
+                node = new DomiNode();
+                node.ID = id[0];
+                node.parent = this.node;
+                this.logicNode.push(node);
+
+            }
+        }
+
+    }
+
+
     liftUp(){
         this.node.active = true;
         this.Shadow.node.active = true;
@@ -48,15 +138,16 @@ export default class Domino extends cc.Component {
         this.node.runAction(cc.scaleBy(0.1, 1.1));
     }
 
-    placeDown(dest:cc.Vec3, callback:Function){
+    placeDown(dest:cc.Vec3, scale:number, callback:Function){
         this.Shadow.node.runAction(cc.sequence(cc.moveBy(0.1, cc.v2(10,10)), cc.callFunc(()=>{
             this.Shadow.node.active = false;
             this.node.active = false;
             if (callback != null){
                 callback();
                 if (this.rootBtn!=null){
-                    //this.rootBtn.draw();
                     this.rootBtn.BlackSprite.node.active = true;
+                    this.rootBtn.testDraw();
+                    this.rootBtn.isPlayed = true;
                 }
             }
 
@@ -66,11 +157,12 @@ export default class Domino extends cc.Component {
         var d = this.node.parent.convertToNodeSpaceAR(dest);
         this.node.runAction(cc.moveTo(0.1, d.x, d.y));
 
-        this.node.runAction(cc.scaleTo(0.1,1));
+        this.node.runAction(cc.scaleTo(scale,1));
     }
 
     returnToOriginal(){
-        this.placeDown(this.startedPosition, null);
+        this.placeDown(this.startedPosition,1, null);
+        this.rootBtn.BlackSprite.node.active = false;
     }
 
     // update (dt) {}

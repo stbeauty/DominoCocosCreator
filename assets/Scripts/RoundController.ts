@@ -9,16 +9,15 @@ const { ccclass, property } = cc._decorator;
 import Domino from "./Domino";
 import DominoButton from "./DominoButton";
 import DominoDesk from "./DominoDesk";
-import DomiTransform from "./DomiTransform";
-import GameAI from "./GameAI";
 import GameManager from "./GameManager";
+import PlayInfo from "./Network/PlayInfo";
 import Player from "./Player";
 import ResultController from "./ResultController";
 import { RoundState } from "./RoundState";
 import Tools from "./Tools";
 import User from "./User";
 
-enum EventCode{
+enum EventCode {
     START,
     DOMINO_PACK,
     TURN,
@@ -26,6 +25,8 @@ enum EventCode{
 }
 @ccclass
 export default class RoundController extends cc.Component {
+    isTesting: boolean = false;
+
     @property(DominoDesk)
     Desk: DominoDesk = null;
 
@@ -50,26 +51,26 @@ export default class RoundController extends cc.Component {
     Player: Player = null;
 
     @property(cc.Node)
-    LoadingNode:cc.Node = null;
+    LoadingNode: cc.Node = null;
 
     @property(ResultController)
-    ResultCtrl:ResultController = null;
+    ResultCtrl: ResultController = null;
 
-    OtherPlayers:User[] = [];
-    PlayingPlayers:User[] = [];
-    
+    OtherPlayers: User[] = [];
+    PlayingPlayers: User[] = [];
 
-    @property(cc.Button)
-    ManualStart:cc.Button = null;
 
     @property(cc.Button)
-    FakeWin:cc.Button = null;
+    ManualStart: cc.Button = null;
+
     @property(cc.Button)
-    FakeLose:cc.Button = null;
+    FakeWin: cc.Button = null;
+    @property(cc.Button)
+    FakeLose: cc.Button = null;
 
     Net: PhotonClient = null;
 
-    isHost:boolean = false;
+    isHost: boolean = false;
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -82,8 +83,10 @@ export default class RoundController extends cc.Component {
     currentPlayer: number = 0;
     countDown: number = 0;
 
-    fakeLoading:number = 0;
-    fakeWintime:number = 0;
+    fakeLoading: number = 0;
+    fakeWintime: number = 0;
+
+    isPlayerTurn: boolean = false;
 
 
     onLoad() {
@@ -110,60 +113,50 @@ export default class RoundController extends cc.Component {
     onTouchMove(touch, event) {
         this.PlayerDomino.node.position = this.node.convertToNodeSpaceAR(touch.getLocation());
 
-        var node = this.Desk.checkCanPlace(this.PlayerDomino);
+        var align = this.Desk.getClosestAlignment(this.PlayerDomino.ID, touch.getLocation());
 
-        if (node != null) {
-            if (node.isRoot == false) {
-                var transform = new DomiTransform(this.PlayerDomino, node);
-                if (transform.Valid) {
-                    this.PlayerDomino.node.opacity = 255;
-                    this.PlayerDomino.node.angle = transform.Angle;
-                } else {
-                    this.PlayerDomino.node.angle = 0;
-                    this.PlayerDomino.node.opacity = 128;
-                }
-            } else this.PlayerDomino.node.opacity = 255;
-        } else {
-            this.PlayerDomino.node.angle = 0;
-            this.PlayerDomino.node.opacity = 128;
+        this.PlayerDomino.node.opacity = 255;
+        if (align)
+            this.PlayerDomino.rotate(Domino.findAngle(this.PlayerDomino.ID, align));
+        else {
+            if (this.Desk.LogicList.length > 0)
+                this.PlayerDomino.node.opacity = 128;
         }
-
-
 
     }
 
     onTouchEnd(touch, event) {
 
-        var node = this.Desk.checkCanPlace(this.PlayerDomino);
-        console.log(node);
+        if (this.isPlayerTurn) {
+            var align = this.Desk.getClosestAlignment(this.PlayerDomino.ID, touch.getLocation());
 
-        if (node == null) {
+            if (align) {
+                var playInfo: PlayInfo = new PlayInfo();
+                playInfo.alignID = align.ID;
+                playInfo.dominoID = this.PlayerDomino.ID;
+
+                this.Net.raiseEvent(EventCode.PLAY, playInfo);
+
+                this.onlPlay(playInfo, this.Net.myActor().actorNr);
+
+            } else {
+
+                if (this.Desk.LogicList.length == 0) {
+
+                    var playInfo: PlayInfo = new PlayInfo();
+
+                    playInfo.dominoID = this.PlayerDomino.ID;
+
+                    this.Net.raiseEvent(EventCode.PLAY, playInfo);
+
+                    this.onlPlay(playInfo, this.Net.myActor().actorNr);
+
+                } else {
+                    this.PlayerDomino.returnToOriginal();
+                }
+            }
+        } else
             this.PlayerDomino.returnToOriginal();
-        }
-        else if (node.isRoot) {
-
-            this.PlayerDomino.placeDown(Tools.WorldPos(this.Desk.node), () => {
-                this.Desk.placeRoot(this.PlayerDomino.ID);
-                //this.nextTurn();
-            });
-
-
-        } else {
-
-            var transform = new DomiTransform(this.PlayerDomino, node);
-            if (transform.Valid) {
-
-                this.PlayerDomino.placeDown(transform.Position, () => {
-                    this.Desk.place(transform);
-                    //this.nextTurn();
-                });
-
-
-            } else
-                this.PlayerDomino.returnToOriginal();
-        }
-
-
     }
 
     initDeck() {
@@ -182,24 +175,24 @@ export default class RoundController extends cc.Component {
 
     start() {
 
-        this.ManualStart.node.on('click', ()=>{
-            this.ManualStart.node.active = false;
+        this.ManualStart.node.on('click', () => {
 
-            this.PlayingPlayers.push(this.Player);
-            if (this.LeftPlayer.netActor)
-                this.PlayingPlayers.push(this.LeftPlayer);
-                if (this.TopPlayer.netActor)
-                this.PlayingPlayers.push(this.TopPlayer);
-                if (this.RightPlayer.netActor)
-                this.PlayingPlayers.push(this.RightPlayer);
+            if (this.isTesting) {
+                this.isPlayerTurn = true;
+                this.DomiButtons.forEach(btn => btn.setDomino(this.drawDonimo()));
+                this.Player.parsePack(null);
+                return;
+            }
+            this.ManualStart.node.active = false;
 
             this.Net.myRoom().setIsOpen(false);
             this.Net.raiseEvent(EventCode.START);
-            
-            var pack1:string[] = [];
-            var pack2:string[] = [];
-            var pack3:string[] = [];
-            var pack4:string[] = [];
+            this.onlStart();
+
+            var pack1: string[] = [];
+            var pack2: string[] = [];
+            var pack3: string[] = [];
+            var pack4: string[] = [];
             for (var i = 0; i < 7; i++) {
                 pack1.push(this.drawDonimo());
                 pack2.push(this.drawDonimo());
@@ -208,20 +201,23 @@ export default class RoundController extends cc.Component {
             }
 
             this.parseDominoPack(pack1);
-            if (this.LeftPlayer.netActor){
-                this.Net.raiseEvent(EventCode.DOMINO_PACK, pack2, {targetActors:[this.LeftPlayer.netActor.actorNr]});
+            if (this.LeftPlayer.netActor) {
+                this.Net.raiseEvent(EventCode.DOMINO_PACK, pack2, { targetActors: [this.LeftPlayer.netActor.actorNr] });
             }
-            if (this.TopPlayer.netActor){
-                this.Net.raiseEvent(EventCode.DOMINO_PACK, pack2, {targetActors:[this.TopPlayer.netActor.actorNr]});
+            if (this.TopPlayer.netActor) {
+                this.Net.raiseEvent(EventCode.DOMINO_PACK, pack2, { targetActors: [this.TopPlayer.netActor.actorNr] });
             }
-            if (this.RightPlayer.netActor){
-                this.Net.raiseEvent(EventCode.DOMINO_PACK, pack2, {targetActors:[this.RightPlayer.netActor.actorNr]});
+            if (this.RightPlayer.netActor) {
+                this.Net.raiseEvent(EventCode.DOMINO_PACK, pack2, { targetActors: [this.RightPlayer.netActor.actorNr] });
             }
+
 
             this.Net.raiseEvent(EventCode.TURN, this.Net.myActor().actorNr);
             this.currentPlayer = this.Net.myActor().actorNr;
             this.countDown = 10;
-            this.Player.startCountDown(10);
+            this.onlTurn(this.currentPlayer);
+
+
         });
 
         this.PlayerDomino.node.active = false;
@@ -250,11 +246,11 @@ export default class RoundController extends cc.Component {
             this.ResultCtrl.node.active = true;
             if (this.fakeWintime <= 1)
                 this.ResultCtrl.showNormalWin();
-                else
+            else
                 this.ResultCtrl.showFinalWin();
         })
 
-        
+
         this.FakeLose.node.on("click", () => {
             this.ResultCtrl.node.active = true;
             this.ResultCtrl.showLose();
@@ -262,46 +258,102 @@ export default class RoundController extends cc.Component {
 
         this.ResultCtrl.node.active = false;
         this.startLoading();
-        
+
     }
 
-    onEventSetup(){
+    onlStart() {
+        this.state = RoundState.SHUFFLE;
+
+        this.PlayingPlayers.push(this.Player);
+        if (this.LeftPlayer.netActor)
+            this.PlayingPlayers.push(this.LeftPlayer);
+        if (this.TopPlayer.netActor)
+            this.PlayingPlayers.push(this.TopPlayer);
+        if (this.RightPlayer.netActor)
+            this.PlayingPlayers.push(this.RightPlayer);
+
+    }
+
+    onlDominoPack(pack: string[]) {
+        this.parseDominoPack(pack);
+    }
+
+    onlTurn(actor: number) {
+        this.isPlayerTurn = actor == this.Net.myActor().actorNr;
+        this.PlayingPlayers.forEach(player => player.stopCountDown());
+
+        if (this.isPlayerTurn) {
+
+            this.Player.startCountDown(10);
+        }
+        else {
+            this.OtherPlayers.forEach(player => { if (player.netActor && player.netActor.actorNr == actor) player.startCountDown(10) });
+            if (this.PlayerDomino.node.active && this.isHost == false)
+                this.PlayerDomino.returnToOriginal();
+        }
+    }
+
+    onlPlay(playInfo: PlayInfo, actor: number) {
+        var domi = this.Desk.Instantiate(playInfo.dominoID, playInfo.alignID);
+        var align = this.Desk.findAlignWithID(playInfo.alignID);
+
+        if (actor != this.Net.myActor().actorNr) {
+
+            domi.node.opacity = 255;
+            this.Desk.prepareRealign();
+            this.Desk.realign();
+        } else {
+
+            this.Desk.prepareRealign();
+            this.PlayerDomino.placeDown(align?Tools.WorldPos(align).add(this.Desk.targetAlignPos):Tools.WorldPos(this.Desk.node), this.Desk.targetAlignScale, () => {
+                domi.node.opacity = 255;
+            });
+
+            this.Desk.realign();
+        }
+        if (this.isHost) {
+            this.nextPlayerTurn();
+        }
+    }
+
+    onEventSetup() {
         this.Net.onEvent = (code, content, actorNR) => {
             console.log(code + " " + content);
-            
+
             switch (code) {
                 case EventCode.START:
-                    this.state = RoundState.SHUFFLE;
+                    this.onlStart();
                     break;
-                case EventCode.DOMINO_PACK:{
-                    var pack:string[] = content;
-                    this.parseDominoPack(pack);
-                    
+                case EventCode.DOMINO_PACK:
+                    this.onlDominoPack(content);
+                    break;
 
-                    break;
-                }
                 case EventCode.TURN:
-                    var actor:number = content;
-                    if (actor == this.Net.myActor().actorNr)
-                        this.Player.startCountDown(10);
-                        else
-                        this.OtherPlayers.forEach(player=>{if (player.netActor && player.netActor.actorNr==actor) player.startCountDown(10)});
+                    this.onlTurn(content)
+                    break;
+                case EventCode.PLAY:
+                    this.onlPlay(content, actorNR);
                     break;
             }
         };
     }
 
-    parseDominoPack(pack:string[]){
+    parseDominoPack(pack: string[]) {
         this.Player.parsePack(null);
 
-                    this.OtherPlayers.forEach (player => {if (player.netActor != null) player.parsePack(null);
-                        });
+        this.OtherPlayers.forEach(player => {
+            if (player.netActor != null) player.parsePack(null);
+        });
 
-        for (var i = 0;i < pack.length; i++)
+        for (var i = 0; i < pack.length; i++)
             this.DomiButtons[i].setDomino(pack[i]);
     }
 
-    updatePlayerCount(){
+    updatePlayerCount() {
+        if (this.isTesting) {
+            this.ManualStart.node.active = true;
+            return;
+        }
         this.isHost = (this.Net.myRoomMasterActorNr() == this.Net.myActor().actorNr);
         this.ManualStart.node.active = (this.Net.myRoomActorCount() > 1 && this.isHost && this.state == RoundState.STAND_BY);
         if (this.Net.myRoomActorCount() > 1)
@@ -310,18 +362,18 @@ export default class RoundController extends cc.Component {
 
     updatePlayerPosition() {
         console.log("UpdatePlayerPosition");
-        
+
         if (this.state != RoundState.STAND_BY)
             return;
 
-        var players:Photon.LoadBalancing.Actor[] = this.Net.myRoomActorsArray();
+        var players: Photon.LoadBalancing.Actor[] = this.Net.myRoomActorsArray();
         //var m:Photon.LoadBalancing.Actor[]
 
         if (players.length == 1)
             return;
-            
 
-        var sortedPlayers:Photon.LoadBalancing.Actor[] = players.sort((obj1, obj2) => {
+
+        var sortedPlayers: Photon.LoadBalancing.Actor[] = players.sort((obj1, obj2) => {
             if (obj1.actorNr < obj2.actorNr) {
                 return 1;
             }
@@ -335,9 +387,9 @@ export default class RoundController extends cc.Component {
 
 
         var anchorIdx = 0;
-        for (var i = 0; i < sortedPlayers.length; i++){
+        for (var i = 0; i < sortedPlayers.length; i++) {
             if (sortedPlayers[i].actorNr == this.Net.myActor().actorNr) {
-                
+
                 anchorIdx = i;
                 break;
             }
@@ -354,7 +406,7 @@ export default class RoundController extends cc.Component {
         anchorIdx++; if (anchorIdx >= sortedPlayers.length) anchorIdx = 0;
 
         if (sortedPlayers.length == 2) {
-            
+
             this.TopPlayer.node.active = true;
             this.TopPlayer.reset(sortedPlayers[anchorIdx].name);
             this.TopPlayer.netActor = sortedPlayers[anchorIdx];
@@ -381,7 +433,7 @@ export default class RoundController extends cc.Component {
         }
     }
 
-    startLoading(){
+    startLoading() {
         this.ResultCtrl.node.active = false;
         this.LoadingNode.active = true;
         this.fakeLoading = 3;
@@ -389,38 +441,46 @@ export default class RoundController extends cc.Component {
 
 
     update(dt) {
-        if (this.isHost){
-            if (this.countDown > 0){
+        if (this.isHost) {
+            if (this.countDown > 0) {
                 this.countDown -= dt;
-                if (this.countDown <= 0){
+                if (this.countDown <= 0) {
                     this.nextPlayerTurn();
                     this.countDown = 10;
                 }
             }
         }
 
-        if (this.LoadingNode.active){
+
+        if (this.LoadingNode.active) {
             if (this.fakeLoading <= 0) {
-                this.LoadingNode.active = false;       
+                this.LoadingNode.active = false;
             }
             if (this.fakeLoading > 0)
                 this.fakeLoading -= dt;
         }
     }
 
-    nextPlayerTurn(){
-        for (var i = 0; i<this.PlayingPlayers.length; i++)
+    nextPlayerTurn() {
+        if (this.countDown <= 0 && this.PlayerDomino.node.active)
+            this.PlayerDomino.returnToOriginal();
+        this.countDown = 0;
+
+        for (var i = 0; i < this.PlayingPlayers.length; i++)
             if (this.currentPlayer == this.PlayingPlayers[i].netActor.actorNr)
                 break;
+
         i++;
         if (i >= this.PlayingPlayers.length)
-        i = 0;
+            i = 0;
 
         var next = this.PlayingPlayers[i];
 
+        this.countDown = 10;
         next.startCountDown(10);
         this.currentPlayer = next.netActor.actorNr;
-        this.Net.raiseEvent(EventCode.TURN, next.netActor.actorNr);
+        this.Net.raiseEvent(EventCode.TURN, this.currentPlayer);
+        this.onlTurn(this.currentPlayer);
     }
 
 }
