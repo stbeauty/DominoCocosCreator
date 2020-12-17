@@ -16,8 +16,10 @@ export default class HouseControl extends cc.Component {
     Houses: House[] = [];
 
     SetScore(score:number){
-        if (score <= 0)
+        if (score <= 0){
             this.Houses.forEach(house => house.Disable());
+            return;
+        }
         
         var h = 50;
         for (var i = 0; i < this.Houses.length; i++){

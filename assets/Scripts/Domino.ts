@@ -32,8 +32,11 @@ export default class Domino extends cc.Component {
     logicNode:DomiNode[] = [];
     isRoot:boolean = false;
 
-    start () {
+    onLoad(){
         this.node.children.forEach(node=> node.active = false);
+    }
+    start () {
+       
     }
 
     static findAngle(ID: string, alignment: AlignmentInfo) {

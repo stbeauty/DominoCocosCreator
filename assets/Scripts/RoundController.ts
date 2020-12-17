@@ -135,7 +135,7 @@ export default class RoundController extends cc.Component {
                 playInfo.alignID = align.ID;
                 playInfo.dominoID = this.PlayerDomino.ID;
 
-                this.Net.raiseEvent(EventCode.PLAY, playInfo);
+                //this.Net.raiseEvent(EventCode.PLAY, playInfo);
 
                 this.onlPlay(playInfo, this.Net.myActor().actorNr);
 
@@ -147,7 +147,7 @@ export default class RoundController extends cc.Component {
 
                     playInfo.dominoID = this.PlayerDomino.ID;
 
-                    this.Net.raiseEvent(EventCode.PLAY, playInfo);
+                   // this.Net.raiseEvent(EventCode.PLAY, playInfo);
 
                     this.onlPlay(playInfo, this.Net.myActor().actorNr);
 
@@ -295,6 +295,22 @@ export default class RoundController extends cc.Component {
 
     onlPlay(playInfo: PlayInfo, actor: number) {
         var domi = this.Desk.Instantiate(playInfo.dominoID, playInfo.alignID);
+        if (this.isPlayerTurn){
+            var score = this.Desk.calculateScore();
+
+            if (this.Player.currentPoint == 0 && score == 10){
+
+            } else if (this.Player.currentPoint > 0 && score % 5 == 0){
+
+            } else
+                score = 0;
+            
+                playInfo.points = score;
+                this.Net.raiseEvent(EventCode.PLAY, playInfo);
+        }
+
+
+
         var align = this.Desk.findAlignWithID(playInfo.alignID);
 
         if (actor != this.Net.myActor().actorNr) {
@@ -307,10 +323,21 @@ export default class RoundController extends cc.Component {
             this.Desk.prepareRealign();
             this.PlayerDomino.placeDown(align?Tools.WorldPos(align).add(this.Desk.targetAlignPos):Tools.WorldPos(this.Desk.node), this.Desk.targetAlignScale, () => {
                 domi.node.opacity = 255;
+                
+
             });
 
             this.Desk.realign();
         }
+
+        this.PlayingPlayers.forEach (player => {
+            if (player.netActor.actorNr == actor){
+                player.currentPoint += playInfo.points;
+                player.Houses.SetScore(player.currentPoint);
+            }
+        });
+
+
         if (this.isHost) {
             this.nextPlayerTurn();
         }

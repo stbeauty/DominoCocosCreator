@@ -98,6 +98,17 @@ export default class DominoDesk extends cc.Component {
         return domi;
     }
 
+    calculateScore():number{
+        var point:number = 0;
+        this.LogicList.forEach(node => {
+            if (node.isActive && node.RootDirection != Direction.CENTER){
+                point += Number(node.ID);
+            }
+        })
+
+        return point;
+    }
+
     // checkCanPlace(curDomi: Domino): DomiNode {
     //     var r: DomiNode = null;
     //     if (this.DominoList.length == 0) {
