@@ -33,8 +33,13 @@ export default class Domino extends cc.Component {
     isRoot:boolean = false;
 
     onLoad(){
+        this.hideAll();
+    }
+
+    hideAll(){
         this.node.children.forEach(node=> node.active = false);
     }
+
     start () {
        
     }
@@ -117,18 +122,6 @@ export default class Domino extends cc.Component {
             node.ID = id[1];
             this.logicNode.push(node);
 
-            if (isRoot == false){
-                var node: DomiNode = new DomiNode();
-                node.ID = id[0];
-                node.parent = this.node;
-                this.logicNode.push(node);
-
-                node = new DomiNode();
-                node.ID = id[0];
-                node.parent = this.node;
-                this.logicNode.push(node);
-
-            }
         }
 
     }

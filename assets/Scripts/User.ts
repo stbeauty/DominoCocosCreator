@@ -6,6 +6,7 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 import Domino from "./Domino";
+import SyncLogic from "./Network/SyncLogic";
 import HouseControl from "./Support/HouseControl";
 
 const {ccclass, property} = cc._decorator;
@@ -40,10 +41,12 @@ export default class User extends cc.Component {
 
     countdown:number = 0;
 
-    currentPoint:number = 0;
+    sync:SyncLogic = new SyncLogic();
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {}
+    onLoad () {
+        this.closeHand();
+    }
 
     start () {
         //this.reset("");
@@ -54,6 +57,23 @@ export default class User extends cc.Component {
             this.countdown -= dt;
             this.UICountDown.progress = this.countdown / 10;
         }
+    }
+
+    showHand(){
+        if (this.HandDominoes.length > 0){
+            var idx = 0;
+            for (var i = 0; i < 7; i++)
+                if (this.sync.played[i] == false)
+                    {
+                        this.HandDominoes[idx].setSprite(this.sync.dominoes[i]);
+                        idx++;
+                    }
+        }
+    }
+
+    closeHand(){
+        this.HandDominoes.forEach (domi => domi.hideAll());
+
     }
 
     /////

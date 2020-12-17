@@ -39,6 +39,11 @@ export default class DominoDesk extends cc.Component {
 
     }
 
+    clear(){
+        this.node.removeAllChildren();
+        this.LogicList = [];
+    }
+
     Instantiate(ID: string, alignID: number): Domino {
 
         var domi = cc.instantiate(this.DominoPrefab).getComponent(Domino);
@@ -70,8 +75,9 @@ export default class DominoDesk extends cc.Component {
         }
 
         if (domiNode) {
-            if (domiNode.RootDirection != Direction.CENTER)
+            //if (domiNode.RootDirection != Direction.CENTER)
                 domiNode.isActive = false;
+            
 
             if (ID[0] != ID[1]) {
                 domi.logicNode.forEach(node => {
@@ -98,6 +104,16 @@ export default class DominoDesk extends cc.Component {
         return domi;
     }
 
+    findActiveID() : string[]{
+        var result:string[] = [];
+        this.LogicList.forEach(node =>{
+            if (node.isActive)
+                result.push(node.ID);
+        })
+
+        return result;
+    }
+
     calculateScore():number{
         var point:number = 0;
         this.LogicList.forEach(node => {
@@ -109,47 +125,6 @@ export default class DominoDesk extends cc.Component {
         return point;
     }
 
-    // checkCanPlace(curDomi: Domino): DomiNode {
-    //     var r: DomiNode = null;
-    //     if (this.DominoList.length == 0) {
-    //         var node = new DomiNode();
-    //         node.isRoot = true;
-    //         return node;
-    //     } else {
-
-    //         this.DominoList.forEach(node => {
-    //             if (node.CheckMatch(curDomi)) {
-    //                 r = node;
-    //             }
-    //         });
-    //     }
-    //     return r;
-    // }
-
-    // validate (topleft:cc.Vec3, botright:cc.Vec3, target: cc.Vec3) : boolean{
-
-    //     for (var i = 0; i < this.DominoList.length; i++){
-    //         var node = this.DominoList[i];
-    //         if (node.Pos().x < botright.x && node.Pos().x > topleft.x && node.Pos().y < topleft.y && node.Pos().y > botright.y){
-    //             if (Math.abs(node.Pos().x - target.x) < 75 || Math.abs(node.Pos().y - target.y) < 75)
-    //             return false;
-
-    //             if (node.Pos().x < target.x && node.RootDirection == Direction.RIGHT && node.Pos().y > target.y - 35 && node.Pos().y < target.y +35)
-    //             return false;
-    //             if (node.Pos().x > target.x && node.RootDirection == Direction.LEFT&& node.Pos().y > target.y - 35 && node.Pos().y < target.y +35)
-    //             return false;
-    //             if (node.Pos().y < target.y && node.RootDirection == Direction.TOP&& node.Pos().x > target.x - 35 && node.Pos().x < target.x +35)
-    //             return false;
-    //             if (node.Pos().y > target.y && node.RootDirection == Direction.BOT&& node.Pos().x > target.x - 35 && node.Pos().x < target.x +35)
-    //             return false;
-
-
-    //         }
-    //     }
-
-    //     return true;
-
-    // }
 
     getClosestAlignment(ID: string, worldPos: cc.Vec3): AlignmentInfo {
         if (this.LogicList.length == 0)
