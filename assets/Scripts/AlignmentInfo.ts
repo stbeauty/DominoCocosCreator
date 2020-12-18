@@ -17,6 +17,8 @@ export default class AlignmentInfo extends cc.Node {
     isPortrait: boolean = false;
     isActive: boolean = true;
     isForDouble: boolean = false;
+    isStraight:boolean = false;
+    isSide:boolean = false;
     ID:number = 0;
     Root:DomiNode = null;
 
@@ -43,6 +45,10 @@ export default class AlignmentInfo extends cc.Node {
         switch (direction) {
             case Direction.TOP:
                 this.y = 105;
+                if (parent.RootDirection == Direction.BOT)
+                    this.isStraight = true;
+                    else
+                    this.isSide = true;
                 break;
             case Direction.TOP_RIGHT:
                 if (isPortrait){
@@ -55,6 +61,10 @@ export default class AlignmentInfo extends cc.Node {
                 break;
             case Direction.RIGHT:
                 this.x = 105;
+                if (parent.RootDirection == Direction.LEFT)
+                    this.isStraight = true;
+                    else
+                    this.isSide = true;
                 break;
             case Direction.RIGHT_BOT:
                 if (isPortrait){
@@ -67,6 +77,10 @@ export default class AlignmentInfo extends cc.Node {
                 break;
             case Direction.BOT:
                 this.y = -105;
+                if (parent.RootDirection == Direction.TOP)
+                    this.isStraight = true;
+                    else
+                    this.isSide = true;
                 break;
             case Direction.BOT_LEFT:
                 if (isPortrait){
@@ -79,6 +93,10 @@ export default class AlignmentInfo extends cc.Node {
                 break;
             case Direction.LEFT:
                 this.x = -105;
+                if (parent.RootDirection == Direction.RIGHT)
+                    this.isStraight = true;
+                    else
+                    this.isSide = true;
                 break;
             case Direction.LEFT_TOP:
                 if (isPortrait){

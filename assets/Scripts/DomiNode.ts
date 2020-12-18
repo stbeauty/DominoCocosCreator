@@ -9,148 +9,154 @@ import AlignmentInfo from "./AlignmentInfo";
 import { Direction } from "./Direction";
 import Domino from "./Domino";
 import DominoDesk from "./DominoDesk";
+import GameManager from "./GameManager";
 import Tools from "./Tools";
 
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 
 
 export default class DomiNode extends cc.Node {
 
     //Position: cc.Vec3 = cc.Vec3.ZERO;
 
-    ID:string = "";
-    RootDirection:Direction = Direction.LEFT;
+    ID: string = "";
+    RootDirection: Direction = Direction.LEFT;
     Desk: DominoDesk = null;
 
-    isActive : boolean = true;
+    isActive: boolean = true;
 
-    alignNode:AlignmentInfo[] = [];
+    alignNode: AlignmentInfo[] = [];
 
-    static TOP(noside:boolean, tagID:boolean = false) : DomiNode{
+    static TOP(noside: boolean, tagID: boolean = false): DomiNode {
         var domi = new DomiNode;
         domi.RootDirection = Direction.BOT;
 
-        domi.alignNode.push(new AlignmentInfo(true, Direction.TOP, domi,tagID));
-        domi.alignNode.push(new AlignmentInfo(false, Direction.TOP, domi,tagID).convertForDouble());
-        if (noside == false){
-        domi.alignNode.push(new AlignmentInfo(false, Direction.LEFT, domi,tagID));
-        domi.alignNode.push(new AlignmentInfo(false, Direction.LEFT_TOP, domi,tagID));
-        
-        domi.alignNode.push(new AlignmentInfo(false, Direction.TOP_RIGHT, domi,tagID));
-        domi.alignNode.push(new AlignmentInfo(false, Direction.RIGHT, domi,tagID));
+        domi.alignNode.push(new AlignmentInfo(true, Direction.TOP, domi, tagID));
+
+        if (GameManager.Instance().doublePlaced == false)
+            domi.alignNode.push(new AlignmentInfo(false, Direction.TOP, domi, tagID).convertForDouble());
+        if (noside == false) {
+            domi.alignNode.push(new AlignmentInfo(false, Direction.LEFT, domi, tagID));
+            domi.alignNode.push(new AlignmentInfo(false, Direction.LEFT_TOP, domi, tagID));
+
+            domi.alignNode.push(new AlignmentInfo(false, Direction.TOP_RIGHT, domi, tagID));
+            domi.alignNode.push(new AlignmentInfo(false, Direction.RIGHT, domi, tagID));
         }
 
         return domi;
     }
-    static BOT(noside:boolean,tagID:boolean = false) : DomiNode{
+    static BOT(noside: boolean, tagID: boolean = false): DomiNode {
         var domi = new DomiNode;
         domi.RootDirection = Direction.TOP;
-        domi.alignNode.push(new AlignmentInfo(true, Direction.BOT, domi,tagID));
-        domi.alignNode.push(new AlignmentInfo(false, Direction.BOT, domi,tagID).convertForDouble());
+        domi.alignNode.push(new AlignmentInfo(true, Direction.BOT, domi, tagID));
+        if (GameManager.Instance().doublePlaced == false)
+            domi.alignNode.push(new AlignmentInfo(false, Direction.BOT, domi, tagID).convertForDouble());
 
-        if (noside == false){
-        domi.alignNode.push(new AlignmentInfo(false, Direction.RIGHT, domi,tagID));
-        domi.alignNode.push(new AlignmentInfo(false, Direction.RIGHT_BOT, domi,tagID));
-        
-        domi.alignNode.push(new AlignmentInfo(false, Direction.BOT_LEFT, domi,tagID));
+        if (noside == false) {
+            domi.alignNode.push(new AlignmentInfo(false, Direction.RIGHT, domi, tagID));
+            domi.alignNode.push(new AlignmentInfo(false, Direction.RIGHT_BOT, domi, tagID));
 
-        domi.alignNode.push(new AlignmentInfo(false, Direction.LEFT, domi,tagID));
+            domi.alignNode.push(new AlignmentInfo(false, Direction.BOT_LEFT, domi, tagID));
+
+            domi.alignNode.push(new AlignmentInfo(false, Direction.LEFT, domi, tagID));
         }
 
         return domi;
     }
-    static LEFT(noside:boolean,tagID:boolean = false) : DomiNode{
+    static LEFT(noside: boolean, tagID: boolean = false): DomiNode {
         var domi = new DomiNode;
         domi.RootDirection = Direction.RIGHT;
 
-        domi.alignNode.push(new AlignmentInfo(false, Direction.LEFT, domi,tagID));
-        domi.alignNode.push(new AlignmentInfo(true, Direction.LEFT, domi,tagID).convertForDouble());
+        domi.alignNode.push(new AlignmentInfo(false, Direction.LEFT, domi, tagID));
+        if (GameManager.Instance().doublePlaced == false)
+            domi.alignNode.push(new AlignmentInfo(true, Direction.LEFT, domi, tagID).convertForDouble());
 
-        if (noside == false){
-        domi.alignNode.push(new AlignmentInfo(true, Direction.BOT, domi,tagID));
-        domi.alignNode.push(new AlignmentInfo(true, Direction.BOT_LEFT, domi,tagID));
-        
-        domi.alignNode.push(new AlignmentInfo(true, Direction.LEFT_TOP, domi,tagID));
+        if (noside == false) {
+            domi.alignNode.push(new AlignmentInfo(true, Direction.BOT, domi, tagID));
+            domi.alignNode.push(new AlignmentInfo(true, Direction.BOT_LEFT, domi, tagID));
 
-        domi.alignNode.push(new AlignmentInfo(true, Direction.TOP, domi,tagID));
+            domi.alignNode.push(new AlignmentInfo(true, Direction.LEFT_TOP, domi, tagID));
+
+            domi.alignNode.push(new AlignmentInfo(true, Direction.TOP, domi, tagID));
         }
         return domi;
     }
-    static RIGHT(noside:boolean,tagID:boolean = false) : DomiNode{
+    static RIGHT(noside: boolean, tagID: boolean = false): DomiNode {
         var domi = new DomiNode;
         domi.RootDirection = Direction.LEFT;
 
-        domi.alignNode.push(new AlignmentInfo(false, Direction.RIGHT, domi,tagID));
-        domi.alignNode.push(new AlignmentInfo(true, Direction.RIGHT, domi,tagID).convertForDouble());
+        domi.alignNode.push(new AlignmentInfo(false, Direction.RIGHT, domi, tagID));
+        if (GameManager.Instance().doublePlaced == false)
+            domi.alignNode.push(new AlignmentInfo(true, Direction.RIGHT, domi, tagID).convertForDouble());
 
-        if (noside == false){
-        domi.alignNode.push(new AlignmentInfo(true, Direction.TOP, domi,tagID));
-        domi.alignNode.push(new AlignmentInfo(true, Direction.TOP_RIGHT, domi,tagID));
-        
-        domi.alignNode.push(new AlignmentInfo(true, Direction.RIGHT_BOT, domi,tagID));
+        if (noside == false) {
+            domi.alignNode.push(new AlignmentInfo(true, Direction.TOP, domi, tagID));
+            domi.alignNode.push(new AlignmentInfo(true, Direction.TOP_RIGHT, domi, tagID));
 
-        domi.alignNode.push(new AlignmentInfo(true, Direction.BOT, domi,tagID));
+            domi.alignNode.push(new AlignmentInfo(true, Direction.RIGHT_BOT, domi, tagID));
+
+            domi.alignNode.push(new AlignmentInfo(true, Direction.BOT, domi, tagID));
         }
         return domi;
     }
-    static CENTER_LANSCAPE(tagID:boolean = false) : DomiNode{
+    static CENTER_LANSCAPE(tagID: boolean = false): DomiNode {
         var domi = new DomiNode;
         domi.RootDirection = Direction.CENTER;
-        domi.alignNode.push(new AlignmentInfo(true, Direction.TOP, domi,tagID));
-        domi.alignNode.push(new AlignmentInfo(true, Direction.BOT, domi,tagID));
+        domi.alignNode.push(new AlignmentInfo(true, Direction.TOP, domi, tagID));
+        domi.alignNode.push(new AlignmentInfo(true, Direction.BOT, domi, tagID));
         return domi;
     }
 
-    rotate(angle:number){
-        if (angle == 90){
-            switch (this.RootDirection){
+    rotate(angle: number) {
+        if (angle == 90) {
+            switch (this.RootDirection) {
                 case Direction.TOP:
                     this.RootDirection = Direction.RIGHT;
                     break;
-                    case Direction.RIGHT:
-                        this.RootDirection = Direction.BOT;
+                case Direction.RIGHT:
+                    this.RootDirection = Direction.BOT;
                     break;
-                    case Direction.BOT:
-                        this.RootDirection = Direction.LEFT;
+                case Direction.BOT:
+                    this.RootDirection = Direction.LEFT;
                     break;
-                    case Direction.LEFT:
-                        this.RootDirection = Direction.TOP;
+                case Direction.LEFT:
+                    this.RootDirection = Direction.TOP;
                     break;
             }
 
-        } else if (angle == -90){
-            switch (this.RootDirection){
+        } else if (angle == -90) {
+            switch (this.RootDirection) {
                 case Direction.TOP:
                     this.RootDirection = Direction.LEFT;
                     break;
-                    case Direction.RIGHT:
-                        this.RootDirection = Direction.TOP;
+                case Direction.RIGHT:
+                    this.RootDirection = Direction.TOP;
                     break;
-                    case Direction.BOT:
-                        this.RootDirection = Direction.RIGHT;
+                case Direction.BOT:
+                    this.RootDirection = Direction.RIGHT;
                     break;
-                    case Direction.LEFT:
-                        this.RootDirection = Direction.BOT;
+                case Direction.LEFT:
+                    this.RootDirection = Direction.BOT;
                     break;
             }
-        } else if (Math.abs(angle) == 180){
-            switch (this.RootDirection){
+        } else if (Math.abs(angle) == 180) {
+            switch (this.RootDirection) {
                 case Direction.TOP:
                     this.RootDirection = Direction.BOT;
                     break;
-                    case Direction.RIGHT:
-                        this.RootDirection = Direction.LEFT;
+                case Direction.RIGHT:
+                    this.RootDirection = Direction.LEFT;
                     break;
-                    case Direction.BOT:
-                        this.RootDirection = Direction.TOP;
+                case Direction.BOT:
+                    this.RootDirection = Direction.TOP;
                     break;
-                    case Direction.LEFT:
-                        this.RootDirection = Direction.RIGHT;
+                case Direction.LEFT:
+                    this.RootDirection = Direction.RIGHT;
                     break;
             }
         }
 
-        this.alignNode.forEach( align => align.rotate(angle));
+        this.alignNode.forEach(align => align.rotate(angle));
 
     }
 

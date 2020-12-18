@@ -12,11 +12,17 @@ export default class GameManager {
 
     soundOn:boolean = true;
     alignID: number = 0;
+    doublePlaced:boolean = false;
 
     static Instance(): GameManager {
         if (this._instance == null)
             this._instance = new GameManager();
         return this._instance;
+    }
+
+    resetGame(){
+        this.alignID = 0;
+        this.doublePlaced = false;
     }
 
     Net: PhotonClient = null;

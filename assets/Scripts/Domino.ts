@@ -9,6 +9,7 @@ import AlignmentInfo from "./AlignmentInfo";
 import { Direction } from "./Direction";
 import DominoButton from "./DominoButton";
 import DomiNode from "./DomiNode";
+import GameManager from "./GameManager";
 import Tools from "./Tools";
 
 const {ccclass, property} = cc._decorator;
@@ -100,23 +101,23 @@ export default class Domino extends cc.Component {
         this.isRoot = isRoot;
         this.logicNode = [];
 
-        var isRootDouble: boolean = isRoot && id[0] == id[1];
+        //var isRootDouble: boolean = isRoot && id[0] == id[1];
 
-        if (isRoot || id[0] != id[1]){
-        var node = DomiNode.LEFT(isRootDouble, true);
+        
+        var node = DomiNode.LEFT(isRoot, true);
         node.parent = this.node;
         node.x = -35;
         node.ID = id[0];
         this.logicNode.push(node);
 
-        node = DomiNode.RIGHT(isRootDouble, true);
+        node = DomiNode.RIGHT(isRoot, true);
         node.parent = this.node;
         node.x = 35;
         node.ID = id[1];
         this.logicNode.push(node);
-        }
+        
 
-        if (id[0] == id[1]){
+        if (id[0] == id[1] && GameManager.Instance().doublePlaced == false){
             var node = DomiNode.CENTER_LANSCAPE(true);
             node.parent = this.node;
             node.ID = id[1];
@@ -134,16 +135,14 @@ export default class Domino extends cc.Component {
         this.node.runAction(cc.scaleBy(0.1, 1.1));
     }
 
-    placeDown(dest:cc.Vec3, scale:number, callback:Function){
+    placeDown(dest:cc.Vec3, scale:number, point:number, callback:Function){
         this.Shadow.node.runAction(cc.sequence(cc.moveBy(0.1, cc.v2(10,10)), cc.callFunc(()=>{
             this.Shadow.node.active = false;
             this.node.active = false;
             if (callback != null){
                 callback();
                 if (this.rootBtn!=null){
-                    this.rootBtn.BlackSprite.node.active = true;
-                    this.rootBtn.testDraw();
-                    this.rootBtn.isPlayed = true;
+                    this.rootBtn.setScore(point);
                 }
             }
 
@@ -157,7 +156,7 @@ export default class Domino extends cc.Component {
     }
 
     returnToOriginal(){
-        this.placeDown(this.startedPosition,1, null);
+        this.placeDown(this.startedPosition,1,0, null);
         this.rootBtn.BlackSprite.node.active = false;
     }
 

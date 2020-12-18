@@ -29,6 +29,12 @@ export default class DominoButton extends cc.Button {
     @property(cc.Sprite)
     BlankSprite: cc.Sprite;
 
+    @property(cc.Node)
+    YellowNode: cc.Node = null;
+
+    @property(cc.RichText)
+    PointTxt:cc.RichText = null;
+
     isPlayed:boolean = false;
 
     // LIFE-CYCLE CALLBACKS:
@@ -89,10 +95,30 @@ export default class DominoButton extends cc.Button {
        
     }
 
+    setScore(score: number){
+        this.isPlayed = true;
+        if (score <= 0){
+            this.BlackSprite.node.active = true;
+        } else {
+            this.YellowNode.active = true;
+            this.PointTxt.string = "<outline color=white width=2><b>"+score+"</b></outline>";
+        }
+
+    }
+
     setDomino(id:string){
         this.Domino.setSprite(id);
         this.BlackSprite.node.active = false;
         this.BlankSprite.node.active = false;
+        this.YellowNode.active = false;
+    }
+
+    reset(){
+        this.Domino.hideAll();
+        this.BlackSprite.node.active = false;
+        this.BlankSprite.node.active = true;
+        this.YellowNode.active = false;
+        this.isPlayed = false;
     }
 
     testDraw(){

@@ -17,6 +17,7 @@ import SyncLogic from "./Network/SyncLogic";
 import Player from "./Player";
 import ResultController from "./ResultController";
 import { RoundState } from "./RoundState";
+import Dealer from "./Support/Dealer";
 import Tools from "./Tools";
 import User from "./User";
 
@@ -73,6 +74,9 @@ export default class RoundController extends cc.Component {
     FakeWin: cc.Button = null;
     @property(cc.Button)
     FakeLose: cc.Button = null;
+
+    @property(Dealer)
+    DomiDealer: Dealer = null;
 
     Net: PhotonClient = null;
 
@@ -206,7 +210,7 @@ export default class RoundController extends cc.Component {
         })
 
         this.PlayerDomino.node.active = false;
-        this.statusTxt.string = "Waiting other players...";
+        this.statusTxt.string = "<outline color=black width=4><b>Waiting other players...</b></outline>";
         this.state = RoundState.STAND_BY;
 
         console.log(this.Net.myActor().name);
@@ -295,23 +299,23 @@ export default class RoundController extends cc.Component {
         }
 
 
-        this.Net.raiseEvent(EventCode.TURN, this.Net.myActor().actorNr);
-        this.currentPlayer = this.Net.myActor().actorNr;
-        this.countDown = 10;
-        this.onlTurn(this.currentPlayer);
+        
 
     }
 
     onlStart() {
         this.state = RoundState.SHUFFLE;
 
-        
+        // Reseting things
         this.Desk.clear();
         this.PlayingPlayers = [];
-        this.DomiButtons.forEach(button => button.isPlayed = false);
-        this.Desk.node.position = cc.Vec3.ZERO;
-        this.Desk.node.scale = 1;
+        this.DomiButtons.forEach(button => button.reset());
         
+        GameManager.Instance().resetGame();
+        this.isPlayerTurn = false;
+        // ------------------------------
+        
+        this.statusTxt.node.active = false;
 
         this.PlayingPlayers.push(this.Player);
         if (this.LeftPlayer.netActor)
@@ -327,6 +331,8 @@ export default class RoundController extends cc.Component {
     }
 
     onlDominoPack(info:StartInfo) {
+        //this.statusTxt.string = "<outline color=black width=4><b>Waiting other players...</b></outline>";
+        this.statusTxt.node.active = false;
         this.state = RoundState.DEAL;
 
         this.PlayingPlayers.forEach (player => {
@@ -335,14 +341,20 @@ export default class RoundController extends cc.Component {
             }
         })
 
-        if (info.actor == this.Player.netActor.actorNr)
-                    this.parseDominoPack(info.dominoes);
+        if (info.actor == this.Player.netActor.actorNr){
+            this.countDown = 12;
+            this.DomiDealer.StartShuffling(()=>{
+                this.parseDominoPack(info.dominoes);
+            })
+        }
+                    
 
         
     }
 
     onlTurn(actor: number) {
         this.state = RoundState.PLAYING;
+        this.statusTxt.node.active = false;
 
         this.isPlayerTurn = actor == this.Net.myActor().actorNr;
         this.PlayingPlayers.forEach(player => player.stopCountDown());
@@ -386,7 +398,7 @@ export default class RoundController extends cc.Component {
         } else {
 
             this.Desk.prepareRealign();
-            this.PlayerDomino.placeDown(align?Tools.WorldPos(align).add(this.Desk.targetAlignPos):Tools.WorldPos(this.Desk.node), this.Desk.targetAlignScale, () => {
+            this.PlayerDomino.placeDown(align?Tools.WorldPos(align).add(this.Desk.targetAlignPos):Tools.WorldPos(this.Desk.node), this.Desk.targetAlignScale, playInfo.points, () => {
                 domi.node.opacity = 255;
                 
 
@@ -556,17 +568,40 @@ export default class RoundController extends cc.Component {
 
 
     update(dt) {
-        if (this.state == RoundState.PLAYING){
-        if (this.isHost) {
+        if (this.state == RoundState.PLAYING) {
+            if (this.isHost) {
+                if (this.countDown > 0) {
+                    this.countDown -= dt;
+                    if (this.countDown <= 0) {
+                        this.nextPlayerTurn();
+                        this.countDown = 10;
+                    }
+                }
+            }
+        } else if (this.state == RoundState.DEAL) {
             if (this.countDown > 0) {
                 this.countDown -= dt;
                 if (this.countDown <= 0) {
-                    this.nextPlayerTurn();
-                    this.countDown = 10;
+                    if (this.isHost) {
+                        this.Net.raiseEvent(EventCode.TURN, this.Net.myActor().actorNr);
+                        this.currentPlayer = this.Net.myActor().actorNr;
+                        this.countDown = 10;
+                        this.onlTurn(this.currentPlayer);
+                    }
+                    
+                } else if (this.countDown <= 1) {
+                    this.statusTxt.string = "<outline color=black width=4><b>GO!</b></outline>";
+                }
+                else if (this.countDown <= 4) {
+                    this.statusTxt.string = "<outline color=black width=4><b>" + Math.floor(this.countDown) + "</b></outline>";
+                } else if (this.countDown <= 5) {
+                    if (this.statusTxt.node.active == false) {
+                        this.statusTxt.node.active = true;
+                        this.statusTxt.string = "<outline color=black width=4><b>READY!</b></outline>";
+                    }
                 }
             }
         }
-    }
 
 
         if (this.LoadingNode.active) {
