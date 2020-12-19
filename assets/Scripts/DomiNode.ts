@@ -21,7 +21,9 @@ export default class DomiNode extends cc.Node {
 
     ID: string = "";
     RootDirection: Direction = Direction.LEFT;
-    Desk: DominoDesk = null;
+
+    Domino:Domino = null;
+
 
     isActive: boolean = true;
 

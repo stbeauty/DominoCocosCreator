@@ -26,7 +26,7 @@ export default class HouseControl extends cc.Component {
             if (score <= h)
                 {
                     this.Houses[i].Show(score);
-                    return;
+                    score = 0;
                 } else {
                     this.Houses[i].Show(h);
                     h += 50;

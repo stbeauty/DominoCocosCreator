@@ -14,4 +14,5 @@ export enum RoundState  {
    READY,
    PLAYING,
    END,
+   FINISH,
 }

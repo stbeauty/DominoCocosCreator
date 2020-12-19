@@ -6,13 +6,15 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 
-export default class GameManager {
+export default class GameManager{
 
     static _instance: GameManager = null;
 
     soundOn:boolean = true;
     alignID: number = 0;
     doublePlaced:boolean = false;
+
+    gameTime: number = 1800;
 
     static Instance(): GameManager {
         if (this._instance == null)
@@ -28,7 +30,7 @@ export default class GameManager {
     Net: PhotonClient = null;
 
     constructor() {
-
+        
         this.Net = new PhotonClient();
 
         this.Net.onStateChange = (state) => {

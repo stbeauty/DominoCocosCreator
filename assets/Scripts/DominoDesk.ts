@@ -129,17 +129,25 @@ export default class DominoDesk extends cc.Component {
         var root = Tools.WorldPos(this.node);
 
         this.LogicList.forEach(node => {
-            var pos = Tools.WorldPos(node);
+            
             node.alignNode.forEach (align => {
                 if (align.isActive){
                     var c = Tools.WorldPos(align);
-                    if (((c.x - pos.x) * (c.x - root.x) < 0) || ((c.y - pos.y) * (c.y - root.y) < 0))
-                        align.isActive = false;
+                    this.LogicList.forEach(node2 =>{
+                        if (node2.Domino != node.Domino)
+                            {
+                                var pos = Tools.WorldPos(node2);
+                                if (cc.Vec3.distance(pos, c) <= 105)
+                                    align.isActive = false;
+                            }
+                    });
 
                         c = this.node.parent.convertToNodeSpaceAR(c);
                     if (this.node.scale <= 0.8)
-                        if ((align.isPortrait && (c.y < -250 || c.y > 250)) || (align.isPortrait == false && (c.x < -500 || c.x > 500)))
+                        if ((align.isPortrait && (c.y < -250 || c.y > 250)) || (align.isPortrait == false && (c.x < -666 || c.x > 666)))
                         align.isActive = false;
+
+                    
                 }
             })
         })

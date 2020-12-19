@@ -108,12 +108,14 @@ export default class Domino extends cc.Component {
         node.parent = this.node;
         node.x = -35;
         node.ID = id[0];
+        node.Domino = this;
         this.logicNode.push(node);
 
         node = DomiNode.RIGHT(isRoot, true);
         node.parent = this.node;
         node.x = 35;
         node.ID = id[1];
+        node.Domino = this;
         this.logicNode.push(node);
         
 
@@ -121,9 +123,13 @@ export default class Domino extends cc.Component {
             var node = DomiNode.CENTER_LANSCAPE(true);
             node.parent = this.node;
             node.ID = id[1];
+            node.Domino = this;
             this.logicNode.push(node);
 
         }
+
+        if (isRoot && id[0] == id[1])
+            this.rotate(-90);
 
     }
 

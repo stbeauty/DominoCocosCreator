@@ -30,7 +30,10 @@ export default class House extends cc.Component {
         this.GreyNode.active = false;
         this.Score.node.active = true;
 
+        if (score > 0)
         this.Score.string = "<outline color=white width=2><b>"+score+"</b></outline>";
+        else
+        this.Score.string = "";
     }
 
 

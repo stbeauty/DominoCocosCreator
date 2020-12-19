@@ -37,6 +37,8 @@ export default class DominoButton extends cc.Button {
 
     isPlayed:boolean = false;
 
+    touchInitiated:boolean = false;
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
@@ -49,12 +51,21 @@ export default class DominoButton extends cc.Button {
         this.node.on('touchcancel', this.onTouchCancel, this);
     }
 
-    onTouchStart(touch, event){
-        if (this.RoundControl.isPlayerTurn == false)
-            return;
-        if (this.isPlayed)
-            return;
+    checkTouchCondition():boolean{
+        if (this.RoundControl == null)
+        return false;
+    if (this.RoundControl.isPlayerTurn == false)
+        return false;
+    if (this.isPlayed)
+        return false;
 
+        return true;
+    }
+
+    onTouchStart(touch, event){
+       if (this.checkTouchCondition() == false)
+        return;
+        this.touchInitiated = true;
         this.RoundControl.PlayerDomino.setSprite(this.Domino.ID);
         this.RoundControl.PlayerDomino.startedPosition = Tools.WorldPos(this.node);
         this.RoundControl.PlayerDomino.rootBtn = this;
@@ -64,35 +75,44 @@ export default class DominoButton extends cc.Button {
     }
 
     onTouchMove(touch, event){
-        if (this.RoundControl.isPlayerTurn == false)
+        if (this.checkTouchCondition() == false)
         return;
-        if (this.isPlayed)
+
+        if (this.touchInitiated == false)
             return;
         this.RoundControl.onTouchMove(touch,event);
     }
 
     onTouchEnd(touch, event){
-        if (this.RoundControl.isPlayerTurn == false)
+        if (this.checkTouchCondition() == false)
         return;
-        if (this.isPlayed)
+        if (this.touchInitiated == false)
             return;
         this.RoundControl.onTouchEnd(touch,event);
         this.BlackSprite.node.active = false;
+        this.touchInitiated = false;
     }
 
     onTouchCancel(touch, event){
-        if (this.RoundControl.isPlayerTurn == false)
+        if (this.checkTouchCondition() == false)
         return;
-        if (this.isPlayed)
+        if (this.touchInitiated == false)
             return;
         this.RoundControl.onTouchEnd(touch,event);
         this.BlackSprite.node.active = false;
+        this.touchInitiated = false;
     }
 
     start () {
         //this.draw();
 
        
+    }
+
+    putBlank(){
+        this.BlackSprite.node.active = false;
+        this.BlankSprite.node.active = true;
+        this.YellowNode.active = false;
     }
 
     setScore(score: number){
