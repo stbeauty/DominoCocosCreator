@@ -5,6 +5,10 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
+import AppSettings from "./AppSettings";
+import { PopupType } from "./Enum/PopupType";
+import Popup from "./Support/Popup";
+import StatusBar from "./Support/StatusBar";
 
 export default class GameManager{
 
@@ -15,6 +19,9 @@ export default class GameManager{
     doublePlaced:boolean = false;
 
     gameTime: number = 1800;
+
+    popup: Popup = null;
+    statusBar: StatusBar = null;
 
     static Instance(): GameManager {
         if (this._instance == null)
@@ -30,7 +37,7 @@ export default class GameManager{
     Net: PhotonClient = null;
 
     constructor() {
-        
+
         this.Net = new PhotonClient();
 
         this.Net.onStateChange = (state) => {
@@ -80,6 +87,16 @@ export default class GameManager{
         }
     };
 
+    ShowOKPopup(title:string, content:string, callback:Function){
+        this.popup.setup(title, content, PopupType.OK, callback, null, null);
+        this.popup.node.active = true;
+    }
+
+    ShowYesNoPopup(title:string, content:string, YesCallback:Function, NoCallback:Function){
+        this.popup.setup(title, content, PopupType.YESNO, null, YesCallback, NoCallback);
+        this.popup.node.active = true;
+    }
+
     JoinOrCreateRoom() {
         // if (this.Net.myActor().name == "h")
         // this.Net.createRoom("test");
@@ -90,21 +107,22 @@ export default class GameManager{
 
     }
 
-    // onError(errorCode: number, errorMsg: string) =>{ console.log("");};
-    //     onOperationResponse(errorCode: number, errorMsg: string, code: number, content: any) =>{ console.log("");};
-    //     onEvent(code: number, content: any, actorNr: number)  =>{ console.log("");};
-    //     onRoomList(rooms: RoomInfo[])  =>{ console.log("");};
-    //     onRoomListUpdate(rooms: RoomInfo[], roomsUpdated: RoomInfo[], roomsAdded: RoomInfo[], roomsRemoved: RoomInfo[])  =>{ console.log("");};
-    //     onMyRoomPropertiesChange() =>{ console.log("");};
-    //     onActorPropertiesChange(actor: Actor) =>{ console.log("");};
-    //     onJoinRoom(createdByMe: boolean) =>{ console.log("");};
-    //     onActorJoin(actor: Actor) =>{ console.log("");};
-    //     onActorLeave(actor: Actor, cleanup: boolean) =>{ console.log("");};
-    //     onActorSuspend(actor: Actor) =>{ console.log("");};
-    //     onFindFriendsResult(errorCode: number, errorMsg: string, friends: any) =>{ console.log("");};
-    //     onLobbyStats(errorCode: number, errorMsg: string, lobbies: any[]) =>{ console.log("");};
-    //     onAppStats(errorCode: number, errorMsg: string, stats: any) =>{ console.log("");};
-    //     onGetRegionsResult(errorCode: number, errorMsg: string, regions: {}) =>{ console.log("");};
-    //     onWebRpcResult(errorCode: number, message: string, uriPath: string, resultCode: number, data: any) =>{ console.log("");};
+    public static async Request(api:string, content:any) : Promise<any>{
+        const response = await fetch(AppSettings.BASE_URL + api, {
+            method: 'POST',
+            body: JSON.stringify(content),
+            headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'} });
+
+            
+
+            if (response.body !== null) {
+                var strBody = await response.text();
+                const asJSON = JSON.parse(strBody);  // implicitly 'any', make sure to verify type on runtime.
+
+                return asJSON;
+              }
+            
+              return null;
+    }
 
 }

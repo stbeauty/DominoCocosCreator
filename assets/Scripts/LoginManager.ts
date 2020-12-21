@@ -5,6 +5,7 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
+import GameAPI from "./GameAPI";
 import GameManager from "./GameManager";
 
 
@@ -86,7 +87,17 @@ export default class LoginManager extends cc.Component {
 
     // onLoad () {}
 
-    start() {
+    async start() {
+
+        // var content:any = {};
+        // content.name = "Domino";
+        // content.plateform = "HTML5";
+        // content.android_bundleId = null;
+        // content.Ios_bundleId = null;
+        // var response = await GameManager.Request(GameAPI.GAME_DETAIL, content);
+        // console.log(response);
+        
+
         this.LoginNode.active = false;
         this.MainMenuNode.active = false;
         this.HelpNode.active = false;
@@ -176,6 +187,7 @@ export default class LoginManager extends cc.Component {
 
             GameManager.Instance().Net.connectToRegionMaster("EU");
 
+            //GameManager.Instance().statusBar.Show("This is nothing");
 
         });
 

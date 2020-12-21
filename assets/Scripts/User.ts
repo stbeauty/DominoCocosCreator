@@ -41,6 +41,8 @@ export default class User extends cc.Component {
 
     countdown:number = 0;
 
+    isMinimized:boolean = false;
+
     sync:SyncLogic = new SyncLogic();
     // LIFE-CYCLE CALLBACKS:
 

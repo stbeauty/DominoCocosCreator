@@ -31,6 +31,8 @@ enum EventCode {
     PLAY,
     ROUND_END,
     GAME_END,
+    CHANGE_HOST,
+    RESUME_BROWSER,
 }
 @ccclass
 export default class RoundController extends cc.Component {
@@ -203,6 +205,22 @@ export default class RoundController extends cc.Component {
 
     start() {
 
+        cc.game.pause = () => {
+            if (this.isHost){
+                for (var i = 0; i < this.PlayingPlayers.length; i++)
+                    if (this.PlayingPlayers[i].netActor != null && this.PlayingPlayers[i].netActor.actorNr != this.Player.netActor.actorNr && this.PlayingPlayers[i].isMinimized == false){
+                        this.Net.raiseEvent(EventCode.CHANGE_HOST, this.PlayingPlayers[i].netActor.actorNr);
+                        this.onlChangeHost( this.PlayingPlayers[i].netActor.actorNr, -1)
+                        return;
+                    }
+            }
+        };
+        cc.game.resume =() =>{
+            this.Net.raiseEvent(EventCode.RESUME_BROWSER);
+        }
+
+        cc.game.setFrameRate(50);
+
         this.ManualStart.node.on('click', () => {
 
             if (this.isTesting) {
@@ -360,6 +378,14 @@ export default class RoundController extends cc.Component {
         });
     }
 
+    onlChangeHost(host: number, inactive:number) {
+        this.isHost = (host == this.Player.netActor.actorNr);
+        this.PlayingPlayers.forEach (player => {
+            if (player.netActor.actorNr == inactive)
+                player.isMinimized = true;
+        })
+    }
+
     onlDominoPack(info: StartInfo) {
         //this.statusTxt.string = "<outline color=black width=4><b>Waiting other players...</b></outline>";
         this.statusTxt.node.active = false;
@@ -454,9 +480,9 @@ export default class RoundController extends cc.Component {
 
         this.updateScore(actor, playInfo.points);
 
-        
-        this.PlayingPlayers.forEach (player => {
-            if (player.netActor.actorNr == actor){
+
+        this.PlayingPlayers.forEach(player => {
+            if (player.netActor.actorNr == actor) {
                 player.sync.play(playInfo.dominoID);
             }
         });
@@ -472,7 +498,7 @@ export default class RoundController extends cc.Component {
 
     updateScore(nr: number, points: number) {
         this.PlayingPlayers.forEach(player => {
-            
+
             if (player.netActor.actorNr == nr) {
                 player.sync.points += points;
                 player.Houses.SetScore(player.sync.points);
@@ -499,19 +525,42 @@ export default class RoundController extends cc.Component {
     }
 
     onlRoundEnd(info: RoundResultInfo) {
+
         this.updateScore(info.winActor, info.winPoint);
         this.PlayingPlayers.forEach(player => {
             player.stopCountDown();
             player.showHand();
+
+            if (player.netActor.actorNr == info.winActor) {
+                if (info.winActor == this.Player.netActor.actorNr) {
+                    GameManager.Instance().statusBar.Show("You won this round and earned " + info.winPoint + " points");
+                } else {
+                    GameManager.Instance().statusBar.Show(player.netActor.name + " won this round and earned " + info.winPoint + " points");
+                }
+            }
         });
+        if (info.winActor < 0) {
+            GameManager.Instance().statusBar.Show("Nobody won this round, reshuffling...");
+        }
         this.state = RoundState.END;
         if (this.isHost)
             this.NextRoundBtn.node.active = true;
     }
 
     onlSelecting(actor: number) {
-        this.DomiDealer.turnOnCardSelect(actor != this.Player.netActor.actorNr)
+        this.DomiDealer.turnOnCardSelect(actor != this.Player.netActor.actorNr);
+        this.PlayingPlayers.forEach(player => {
+            if (player.netActor.actorNr == actor) {
+                if (actor == this.Player.netActor.actorNr) {
+                    GameManager.Instance().statusBar.Show("Please select 7 dominoes for your hand");
+                } else {
+                    GameManager.Instance().statusBar.Show("Please wait for " + player.netActor.name + " to choose his dominoes");
+                }
+            }
+        });
     }
+
+
 
     onlDeckSubmit(actor: number, deck: string[]) {
 
@@ -594,9 +643,19 @@ export default class RoundController extends cc.Component {
 
                     this.onlRoundEnd(content);
                     break;
-                    case EventCode.GAME_END:
-                        this.onlGameEnd(content);
+                case EventCode.GAME_END:
+                    this.onlGameEnd(content);
+                    break;
+                    case EventCode.CHANGE_HOST:
+                        this.onlChangeHost(content, actorNR);
                         break;
+                        case EventCode.RESUME_BROWSER:{
+                            this.PlayingPlayers.forEach(player => {
+                                if (player.netActor.actorNr == actorNR)
+                                    player.isMinimized = false;
+                            })
+                            break;
+                        }
             }
         };
     }
@@ -773,6 +832,7 @@ export default class RoundController extends cc.Component {
         if (this.LoadingNode.active) {
             if (this.fakeLoading <= 0) {
                 this.LoadingNode.active = false;
+                GameManager.Instance().ShowOKPopup("Caution!", "Please keep your browser opened and your game active during the game session", null);
             }
             if (this.fakeLoading > 0)
                 this.fakeLoading -= dt;
