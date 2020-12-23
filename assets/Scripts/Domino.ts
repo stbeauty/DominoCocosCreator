@@ -102,9 +102,15 @@ export default class Domino extends cc.Component {
         this.logicNode = [];
 
         //var isRootDouble: boolean = isRoot && id[0] == id[1];
+        var noside = isRoot;
+        if (noside == false){
+            if (id[0] == id[1] && GameManager.Instance().doublePlaced == false)
+                noside = true;
+
+        }
 
 
-        var node = DomiNode.LEFT(isRoot, true);
+        var node = DomiNode.LEFT(noside, true);
         node.parent = this.node;
         node.x = -35;
         node.ID = id[0];
@@ -113,7 +119,7 @@ export default class Domino extends cc.Component {
         if (id[0] == id[1] && GameManager.Instance().doublePlaced)
             node.isActive = false;
 
-        node = DomiNode.RIGHT(isRoot, true);
+        node = DomiNode.RIGHT(noside, true);
         node.parent = this.node;
         node.x = 35;
         node.ID = id[1];
