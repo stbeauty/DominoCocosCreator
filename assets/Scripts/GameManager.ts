@@ -18,7 +18,8 @@ export default class GameManager{
     alignID: number = 0;
     doublePlaced:boolean = false;
 
-    gameTime: number = 1800;
+    gameTime: number = 3600;
+    static TURNTIME: number = 20;
 
     popup: Popup = null;
     statusBar: StatusBar = null;

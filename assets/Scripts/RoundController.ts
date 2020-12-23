@@ -92,7 +92,6 @@ export default class RoundController extends cc.Component {
     statusTxt: cc.RichText = null;
 
     state: RoundState = RoundState.STAND_BY;
-    TIMEINTERVAL: number = 10;
 
     currentPlayer: number = 0;
     countDown: number = 0;
@@ -409,7 +408,7 @@ export default class RoundController extends cc.Component {
 
         if (this.isPlayerTurn) {
 
-            this.Player.startCountDown(10);
+            this.Player.startCountDown(GameManager.TURNTIME);
 
             if (this.Desk.LogicList.length > 0)
                 if (this.Player.sync.canStillPlay(this.Desk.findActiveID()) == false) {
@@ -419,7 +418,7 @@ export default class RoundController extends cc.Component {
                 }
         }
         else {
-            this.OtherPlayers.forEach(player => { if (player.netActor && player.netActor.actorNr == actor) player.startCountDown(10) });
+            this.OtherPlayers.forEach(player => { if (player.netActor && player.netActor.actorNr == actor) player.startCountDown(GameManager.TURNTIME) });
             if (this.PlayerDomino.node.active && this.isHost == false)
                 this.PlayerDomino.returnToOriginal();
         }
@@ -546,7 +545,7 @@ export default class RoundController extends cc.Component {
         this.state = RoundState.PREPARING_NEXT_ROUND;
         this.countDown = 5;
         this.statusTxt.node.active = true;
-        this.statusTxt.string = this.statusTxt.string = "<outline color=black width=4><b>Next round in 5</b></outline>";
+        this.statusTxt.string = this.statusTxt.string = "<outline color=black width=4><b>Next hand in 5</b></outline>";
     }
 
     onlSelecting(actor: number) {
@@ -787,7 +786,7 @@ export default class RoundController extends cc.Component {
                     this.countDown -= dt;
                     if (this.countDown <= 0) {
                         this.nextPlayerTurn();
-                        this.countDown = 10;
+                        this.countDown = GameManager.TURNTIME;
                     }
                 }
             }
@@ -815,7 +814,7 @@ export default class RoundController extends cc.Component {
 
                         this.Net.raiseEvent(EventCode.TURN, NR);
                         this.currentPlayer = NR;
-                        this.countDown = 10;
+                        this.countDown = GameManager.TURNTIME;
                         this.onlTurn(this.currentPlayer);
                     }
 
@@ -834,7 +833,7 @@ export default class RoundController extends cc.Component {
         } else if (this.state == RoundState.PREPARING_NEXT_ROUND){
             this.countDown -= dt;
             if (this.countDown > 0)
-                this.statusTxt.string = this.statusTxt.string = "<outline color=black width=4><b>Next round in "+ Math.floor(this.countDown) + "</b></outline>";
+                this.statusTxt.string = this.statusTxt.string = "<outline color=black width=4><b>Next hand in "+ Math.floor(this.countDown) + "</b></outline>";
                 else {
                     this.statusTxt.node.active = false;
                     if (this.isHost){
@@ -887,8 +886,8 @@ export default class RoundController extends cc.Component {
 
         var next = this.PlayingPlayers[i];
 
-        this.countDown = 10;
-        next.startCountDown(10);
+        this.countDown = GameManager.TURNTIME;
+        next.startCountDown(GameManager.TURNTIME);
         this.currentPlayer = next.netActor.actorNr;
         this.Net.raiseEvent(EventCode.TURN, this.currentPlayer);
         this.onlTurn(this.currentPlayer);

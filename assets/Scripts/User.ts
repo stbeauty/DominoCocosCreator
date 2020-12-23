@@ -6,6 +6,7 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 import Domino from "./Domino";
+import GameManager from "./GameManager";
 import SyncLogic from "./Network/SyncLogic";
 import HouseControl from "./Support/HouseControl";
 
@@ -57,7 +58,8 @@ export default class User extends cc.Component {
     update (dt) {
         if (this.countdown > 0){
             this.countdown -= dt;
-            this.UICountDown.progress = this.countdown / 10;
+            this.UICountDown.progress = this.countdown / GameManager.TURNTIME;
+            
         }
     }
 
