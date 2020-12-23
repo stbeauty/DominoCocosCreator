@@ -83,25 +83,41 @@ export default class DominoDesk extends cc.Component {
         }
 
         if (domiNode) {
-            if (domiNode.RootDirection != Direction.CENTER)
+            if (domiNode.RootDirection != Direction.CENTER){
                 domiNode.isActive = false;
+                domiNode.isCountable = false;
+            } else {
+                if (domiNode.alignNode[0].isActive == false && domiNode.alignNode[1].isActive == false){
+                domiNode.isActive = false;
+                domiNode.isCountable = false;
+                domiNode.Domino.DisableCountable();
+                }
+            }
             
 
             if (ID[0] != ID[1]) {
                 domi.logicNode.forEach(node => {
-                    if (node.ID == domiNode.ID)
+                    if (node.ID == domiNode.ID){
                         node.isActive = false;
+                        node.isCountable = false;
+                    }
                 });
             } else {
-                if (domi.logicNode.length == 2){
-                    var pos1 = Tools.WorldPos(domi.logicNode[0]);
-                    var pos2 = Tools.WorldPos(domi.logicNode[1]);
+
+                    var cNode:DomiNode = null;
+                    domi.logicNode.forEach( n => {
+                        if (n.RootDirection == Direction.CENTER)
+                            cNode = n;
+                    })
+
+                    var pos1 = Tools.WorldPos(cNode.alignNode[0]);
+                    var pos2 = Tools.WorldPos(cNode.alignNode[1]);
                     var pos0 = Tools.WorldPos(domiNode);
                     if (cc.Vec3.distance(pos1,pos0) < cc.Vec3.distance(pos2, pos0))
-                    domi.logicNode[0].isActive = false;
+                    cNode.alignNode[0].isActive = false;
                     else
-                    domi.logicNode[1].isActive = false;
-                }
+                    cNode.alignNode[1].isActive = false;
+                
             }
         }
 
@@ -118,7 +134,7 @@ export default class DominoDesk extends cc.Component {
     findActiveID() : string[]{
         var result:string[] = [];
         this.LogicList.forEach(node =>{
-            if (node.isActive && node.RootDirection != Direction.CENTER)
+            if (node.isActive)
                 result.push(node.ID);
         })
 
@@ -129,9 +145,9 @@ export default class DominoDesk extends cc.Component {
         var root = Tools.WorldPos(this.node);
 
         this.LogicList.forEach(node => {
-            
+            if (node.RootDirection != Direction.CENTER){
             node.alignNode.forEach (align => {
-                if (align.isActive){
+                if (align.isActive && align.isForDouble == false){
                     var c = Tools.WorldPos(align);
                     this.LogicList.forEach(node2 =>{
                         if (node2.Domino != node.Domino)
@@ -150,13 +166,18 @@ export default class DominoDesk extends cc.Component {
                     
                 }
             })
+        }
         })
     }
 
     calculateScore():number{
+        console.log("Scoring...");
+        
         var point:number = 0;
         this.LogicList.forEach(node => {
-            if (node.isActive && node.RootDirection != Direction.CENTER){
+            if (node.isCountable){
+                console.log(node.ID);
+                
                 point += Number(node.ID);
             }
         })
@@ -180,15 +201,10 @@ export default class DominoDesk extends cc.Component {
                 node.alignNode.forEach(align => {
 
                     if (ID[0] == ID[1]){
-                        if (GameManager.Instance().doublePlaced){
-                            if (align.isStraight){
+
+                        if (align.isForDouble)
                                 result = align;
-                            }
-                        } else {
-                            if (align.isForDouble){
-                                result = align;
-                            }
-                        }
+        
                         return;
                     }
 

@@ -15,4 +15,5 @@ export enum RoundState  {
    PLAYING,
    END,
    FINISH,
+   PREPARING_NEXT_ROUND,
 }

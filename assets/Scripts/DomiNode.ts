@@ -21,7 +21,7 @@ export default class DomiNode extends cc.Node {
 
     ID: string = "";
     RootDirection: Direction = Direction.LEFT;
-
+    isCountable:boolean = true;
     Domino:Domino = null;
 
 
@@ -35,7 +35,7 @@ export default class DomiNode extends cc.Node {
 
         domi.alignNode.push(new AlignmentInfo(true, Direction.TOP, domi, tagID));
 
-        if (GameManager.Instance().doublePlaced == false)
+        //if (GameManager.Instance().doublePlaced == false)
             domi.alignNode.push(new AlignmentInfo(false, Direction.TOP, domi, tagID).convertForDouble());
         if (noside == false) {
             domi.alignNode.push(new AlignmentInfo(false, Direction.LEFT, domi, tagID));
@@ -51,7 +51,7 @@ export default class DomiNode extends cc.Node {
         var domi = new DomiNode;
         domi.RootDirection = Direction.TOP;
         domi.alignNode.push(new AlignmentInfo(true, Direction.BOT, domi, tagID));
-        if (GameManager.Instance().doublePlaced == false)
+        //if (GameManager.Instance().doublePlaced == false)
             domi.alignNode.push(new AlignmentInfo(false, Direction.BOT, domi, tagID).convertForDouble());
 
         if (noside == false) {
@@ -70,7 +70,7 @@ export default class DomiNode extends cc.Node {
         domi.RootDirection = Direction.RIGHT;
 
         domi.alignNode.push(new AlignmentInfo(false, Direction.LEFT, domi, tagID));
-        if (GameManager.Instance().doublePlaced == false)
+        //if (GameManager.Instance().doublePlaced == false)
             domi.alignNode.push(new AlignmentInfo(true, Direction.LEFT, domi, tagID).convertForDouble());
 
         if (noside == false) {
@@ -88,7 +88,7 @@ export default class DomiNode extends cc.Node {
         domi.RootDirection = Direction.LEFT;
 
         domi.alignNode.push(new AlignmentInfo(false, Direction.RIGHT, domi, tagID));
-        if (GameManager.Instance().doublePlaced == false)
+        //if (GameManager.Instance().doublePlaced == false)
             domi.alignNode.push(new AlignmentInfo(true, Direction.RIGHT, domi, tagID).convertForDouble());
 
         if (noside == false) {
@@ -106,6 +106,7 @@ export default class DomiNode extends cc.Node {
         domi.RootDirection = Direction.CENTER;
         domi.alignNode.push(new AlignmentInfo(true, Direction.TOP, domi, tagID));
         domi.alignNode.push(new AlignmentInfo(true, Direction.BOT, domi, tagID));
+        domi.isCountable = false;
         return domi;
     }
 

@@ -103,13 +103,15 @@ export default class Domino extends cc.Component {
 
         //var isRootDouble: boolean = isRoot && id[0] == id[1];
 
-        
+
         var node = DomiNode.LEFT(isRoot, true);
         node.parent = this.node;
         node.x = -35;
         node.ID = id[0];
         node.Domino = this;
         this.logicNode.push(node);
+        if (id[0] == id[1] && GameManager.Instance().doublePlaced)
+            node.isActive = false;
 
         node = DomiNode.RIGHT(isRoot, true);
         node.parent = this.node;
@@ -117,9 +119,11 @@ export default class Domino extends cc.Component {
         node.ID = id[1];
         node.Domino = this;
         this.logicNode.push(node);
+        if (id[0] == id[1] && GameManager.Instance().doublePlaced)
+            node.isActive = false;
         
 
-        if (id[0] == id[1] && GameManager.Instance().doublePlaced == false){
+        if (id[0] == id[1]){
             var node = DomiNode.CENTER_LANSCAPE(true);
             node.parent = this.node;
             node.ID = id[1];
@@ -131,6 +135,10 @@ export default class Domino extends cc.Component {
         if (isRoot && id[0] == id[1])
             this.rotate(-90);
 
+    }
+
+    DisableCountable(){
+        this.logicNode.forEach(node => node.isCountable = false);
     }
 
 

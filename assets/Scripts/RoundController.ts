@@ -14,7 +14,6 @@ import GameManager from "./GameManager";
 import PlayInfo from "./Network/PlayInfo";
 import RoundResultInfo from "./Network/RoundResultInfo";
 import StartInfo from "./Network/StartInfo";
-import SyncLogic from "./Network/SyncLogic";
 import Player from "./Player";
 import ResultController from "./ResultController";
 import { RoundState } from "./RoundState";
@@ -33,6 +32,7 @@ enum EventCode {
     GAME_END,
     CHANGE_HOST,
     RESUME_BROWSER,
+    PREPARING_NEXT_ROUND,
 }
 @ccclass
 export default class RoundController extends cc.Component {
@@ -73,8 +73,6 @@ export default class RoundController extends cc.Component {
 
     @property(cc.Button)
     ManualStart: cc.Button = null;
-    @property(cc.Button)
-    NextRoundBtn: cc.Button = null;
 
     @property(cc.Button)
     FakeWin: cc.Button = null;
@@ -238,12 +236,6 @@ export default class RoundController extends cc.Component {
 
         });
 
-        this.NextRoundBtn.node.active = false;
-
-        this.NextRoundBtn.node.on('click', () => {
-            this.NextRoundBtn.node.active = false;
-            this.prepareAndStart();
-        })
 
         this.PlayerDomino.node.active = false;
         this.statusTxt.string = "<outline color=black width=4><b>Waiting other players...</b></outline>";
@@ -543,8 +535,18 @@ export default class RoundController extends cc.Component {
             GameManager.Instance().statusBar.Show("Nobody won this round, reshuffling...");
         }
         this.state = RoundState.END;
-        if (this.isHost)
-            this.NextRoundBtn.node.active = true;
+        if (this.isHost){
+            //this.NextRoundBtn.node.active = true;
+            this.Net.raiseEvent(EventCode.PREPARING_NEXT_ROUND);
+            this.onlPrepareNextRound();
+        }
+    }
+
+    onlPrepareNextRound(){
+        this.state = RoundState.PREPARING_NEXT_ROUND;
+        this.countDown = 5;
+        this.statusTxt.node.active = true;
+        this.statusTxt.string = this.statusTxt.string = "<outline color=black width=4><b>Next round in 5</b></outline>";
     }
 
     onlSelecting(actor: number) {
@@ -656,6 +658,9 @@ export default class RoundController extends cc.Component {
                             })
                             break;
                         }
+                        case EventCode.PREPARING_NEXT_ROUND:
+                            this.onlPrepareNextRound();
+                            break;
             }
         };
     }
@@ -826,6 +831,16 @@ export default class RoundController extends cc.Component {
                     }
                 }
             }
+        } else if (this.state == RoundState.PREPARING_NEXT_ROUND){
+            this.countDown -= dt;
+            if (this.countDown > 0)
+                this.statusTxt.string = this.statusTxt.string = "<outline color=black width=4><b>Next round in "+ Math.floor(this.countDown) + "</b></outline>";
+                else {
+                    this.statusTxt.node.active = false;
+                    if (this.isHost){
+                        this.prepareAndStart();
+                    }
+                }
         }
 
 
