@@ -116,6 +116,7 @@ export default class LoginManager extends cc.Component {
         
         // Help
         this.HelpBackBtn.node.on('click', () => {
+            //this.HelpBackBtn.node.runAction(cc.)
             if (this.RulesNode.active == true) {
                 this.MainMenuNode.active = true;
                 this.HelpNode.active = false;
