@@ -211,6 +211,11 @@ export default class DominoDesk extends cc.Component {
                     if (align.isForDouble && (ID[0] != ID[1]))
                         return;
 
+                    if (align.isStraight == false && node.RootDirection != Direction.CENTER){
+                    var c = this.node.parent.convertToNodeSpaceAR(Tools.WorldPos(align));
+                        if ((align.isPortrait==false && (c.y > -200 && c.y < 200)) || (align.isPortrait  && (c.x > -550 && c.x < 550)))
+                            return;
+                    }
                     
                     if (align.isActive) {
                         var pos = Tools.WorldPos(align);
