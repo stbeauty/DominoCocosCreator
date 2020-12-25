@@ -4553,7 +4553,7 @@ var PhotonClient = /** @class */ (function (_super) {
     function PhotonClient() {
 
 
-        var _this = _super.call(this, Photon.ConnectionProtocol.Wss, "345b9357-6d33-4651-b352-78b9235e751a", "1.0") || this;
+        var _this = _super.call(this, Photon.ConnectionProtocol.Ws, "a0250ba2-65bb-4050-8032-7d343a3e4c95", "1.0") || this;
         //this.connectToRegionMaster("EU");
         return _this;
     }
